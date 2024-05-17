@@ -1,4 +1,5 @@
 import dao.BD;
+import dao.OdontologoDAOCollection;
 import dao.OdontologoDAOH2;
 import model.Odontologo;
 import org.junit.jupiter.api.Assertions;
@@ -31,8 +32,12 @@ public class OdontologoServiceTest {
         Odontologo odontologo1 = new Odontologo("12345", "Juan", "Perez");
         Odontologo odontologo2 = new Odontologo("12345", "Miguel", "Flores");
         Odontologo odontologo3 = new Odontologo("12345", "John", "Doe");
-        OdontologoDAOH2 odontologoDAOH2 = new OdontologoDAOH2();
-        OdontologoService odontologoService = new OdontologoService(odontologoDAOH2);
+
+        // descomentar el DAO a usar
+        // OdontologoDAOH2 odontologoDAOH2 = new OdontologoDAOH2();
+        OdontologoDAOCollection odontologoDAOCollection = new OdontologoDAOCollection();
+
+        OdontologoService odontologoService = new OdontologoService(odontologoDAOCollection);
         Odontologo odontologoGuardado1 = odontologoService.guardarOdontologo(odontologo1);
         Odontologo odontologoGuardado2 = odontologoService.guardarOdontologo(odontologo2);
         Odontologo odontologoGuardado3 = odontologoService.guardarOdontologo(odontologo3);

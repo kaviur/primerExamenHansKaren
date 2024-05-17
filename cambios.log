@@ -30,3 +30,8 @@ SELECT * FROM odontologos [42104-224]
 [2024-05-16 21:05:30] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Miguel Flores - Matrícula: 12345
 [2024-05-16 21:05:30] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: John Doe - Matrícula: 12345
 [2024-05-16 21:05:30] [ INFO ] [Odontologo:91] Lista de todos los odontólogos: [Odontologo: Juan Perez - Matrícula: 12345, Odontologo: Miguel Flores - Matrícula: 12345, Odontologo: John Doe - Matrícula: 12345]
+[2024-05-16 21:08:31] [ INFO ] [BD:34] tablas creada con exito
+[2024-05-16 21:08:31] [ INFO ] [OdontologoDAOCollection:19] Odontólogo guardado localmente en la colección: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:08:31] [ INFO ] [OdontologoDAOCollection:19] Odontólogo guardado localmente en la colección: Odontologo: Miguel Flores - Matrícula: 12345
+[2024-05-16 21:08:31] [ INFO ] [OdontologoDAOCollection:19] Odontólogo guardado localmente en la colección: Odontologo: John Doe - Matrícula: 12345
+[2024-05-16 21:08:31] [ INFO ] [OdontologoDAOCollection:61] Lista de todos los odontólogos en colección: [Odontologo: Juan Perez - Matrícula: 12345, Odontologo: Miguel Flores - Matrícula: 12345, Odontologo: John Doe - Matrícula: 12345]
