@@ -1,3 +1,9 @@
 [2024-05-16 18:59:33] [ INFO ] [BD:29] tabla creada con exito
 [2024-05-16 18:59:33] [ INFO ] [PacienteDAOH2:23] iniciando la operacion de buscado de un paciente con id : 2
-[2024-05-16 18:59:33] [ INFO ] [DomicilioDAOH2:22] iniciando la busqueda de un domicilio con id: 2
+[2024-05-16 18:59:33] [ INFO ] [DomicilioDAOH2:22] iniciando la busqueda de un domicilio con id: 2[2024-05-16 20:52:57] [ INFO ] [BD:34] tablas creada con exito
+[2024-05-16 20:52:57] [ INFO ] [PacienteDAOH2:23] iniciando la operacion de buscado de un paciente con id : 2
+[2024-05-16 20:52:57] [ INFO ] [DomicilioDAOH2:22] iniciando la busqueda de un domicilio con id: 2
+[2024-05-16 20:58:06] [ ERROR] [Odontologo:36] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
+INSERT INTO odontologos (numero_matricula, nombre, apellido) VALUES (?, ?, ?) [42104-224]
+[2024-05-16 20:58:06] [ ERROR] [Odontologo:55] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
+SELECT * FROM odontologos WHERE id = ? [42104-224]

@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 import model.Odontologo;
@@ -12,7 +14,7 @@ public class OdontologoDAOCollection implements iDao<Odontologo>{
 
     @Override
     public Odontologo guardar(Odontologo odontologo) {
-        odontologo.setId(idCounter.incrementAndGet());
+        odontologo.setId((int) idCounter.incrementAndGet());
         odontologos.add(odontologo);
         logger.info("Odontólogo guardado localmente en la colección: " + odontologo);
 
