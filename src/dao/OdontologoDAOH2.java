@@ -6,11 +6,10 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OdontologDAOH2 implements iDao<Odontologo> {
+public class OdontologoDAOH2 implements iDao<Odontologo> {
 
     private static final String SQL_INSERT = "INSERT INTO odontologos (numero_matricula, nombre, apellido) VALUES (?, ?, ?)";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM odontologos WHERE id = ?";
