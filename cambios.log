@@ -7,3 +7,26 @@
 INSERT INTO odontologos (numero_matricula, nombre, apellido) VALUES (?, ?, ?) [42104-224]
 [2024-05-16 20:58:06] [ ERROR] [Odontologo:55] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
 SELECT * FROM odontologos WHERE id = ? [42104-224]
+[2024-05-16 20:59:28] [ ERROR] [Odontologo:36] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
+INSERT INTO odontologos (numero_matricula, nombre, apellido) VALUES (?, ?, ?) [42104-224]
+[2024-05-16 20:59:28] [ ERROR] [Odontologo:55] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
+SELECT * FROM odontologos WHERE id = ? [42104-224]
+[2024-05-16 21:00:32] [ ERROR] [Odontologo:36] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
+INSERT INTO odontologos (numero_matricula, nombre, apellido) VALUES (?, ?, ?) [42104-224]
+[2024-05-16 21:01:28] [ INFO ] [BD:34] tablas creada con exito
+[2024-05-16 21:01:28] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:03:23] [ ERROR] [Odontologo:93] Table "ODONTOLOGOS" not found (this database is empty); SQL statement:
+SELECT * FROM odontologos [42104-224]
+[2024-05-16 21:03:57] [ INFO ] [BD:34] tablas creada con exito
+[2024-05-16 21:03:57] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:03:57] [ INFO ] [Odontologo:91] Lista de todos los odontólogos: [Odontologo: Juan Perez - Matrícula: 12345]
+[2024-05-16 21:04:56] [ INFO ] [BD:34] tablas creada con exito
+[2024-05-16 21:04:56] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:04:56] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:04:56] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:04:56] [ INFO ] [Odontologo:91] Lista de todos los odontólogos: [Odontologo: Juan Perez - Matrícula: 12345, Odontologo: Juan Perez - Matrícula: 12345, Odontologo: Juan Perez - Matrícula: 12345]
+[2024-05-16 21:05:30] [ INFO ] [BD:34] tablas creada con exito
+[2024-05-16 21:05:30] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Juan Perez - Matrícula: 12345
+[2024-05-16 21:05:30] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: Miguel Flores - Matrícula: 12345
+[2024-05-16 21:05:30] [ INFO ] [Odontologo:34] Odontólogo guardado: Odontologo: John Doe - Matrícula: 12345
+[2024-05-16 21:05:30] [ INFO ] [Odontologo:91] Lista de todos los odontólogos: [Odontologo: Juan Perez - Matrícula: 12345, Odontologo: Miguel Flores - Matrícula: 12345, Odontologo: John Doe - Matrícula: 12345]
