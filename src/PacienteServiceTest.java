@@ -1,7 +1,7 @@
 import dao.BD;
 import model.Paciente;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import service.PacienteService;
 
 public class PacienteServiceTest {
