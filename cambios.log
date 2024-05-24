@@ -35,3 +35,12 @@ SELECT * FROM PACIENTES WHERE EMAIL=? [42104-224]
 [2024-05-23 20:04:37] [ INFO ] [BD:31] tablas creada con exito
 [2024-05-23 20:04:37] [ INFO ] [PacienteDAOH2:48] iniciando la operacion de buscado de un paciente con id : 2
 [2024-05-23 20:04:37] [ INFO ] [DomicilioDAOH2:44] iniciando la busqueda de un domicilio con id: 2
+[2024-05-23 20:31:42] [ INFO ] [BD:31] tablas creada con exito
+[2024-05-23 20:31:42] [ INFO ] [PacienteDAOH2:48] iniciando la operacion de buscado de un paciente con id : 2
+[2024-05-23 20:31:42] [ INFO ] [DomicilioDAOH2:44] iniciando la busqueda de un domicilio con id: 2
+[2024-05-23 20:32:12] [ INFO ] [BD:31] tablas creada con exito
+[2024-05-23 20:32:12] [ INFO ] [PacienteDAOH2:106] iniciando la busqueda por email: jorge.pereyra@digitalhouse.com
+[2024-05-23 20:32:12] [ INFO ] [DomicilioDAOH2:44] iniciando la busqueda de un domicilio con id: 1
+[2024-05-23 20:34:35] [ INFO ] [BD:31] tablas creada con exito
+[2024-05-23 20:34:44] [ INFO ] [PacienteDAOH2:106] iniciando la busqueda por email: jorge.pereyra@digitalhouse.com
+[2024-05-23 20:34:44] [ INFO ] [DomicilioDAOH2:44] iniciando la busqueda de un domicilio con id: 1

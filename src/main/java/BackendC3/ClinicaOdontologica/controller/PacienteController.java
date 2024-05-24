@@ -1,5 +1,6 @@
 package BackendC3.ClinicaOdontologica.controller;
 
+import BackendC3.ClinicaOdontologica.dao.BD;
 import BackendC3.ClinicaOdontologica.model.Paciente;
 import BackendC3.ClinicaOdontologica.service.PacienteService;
 import org.springframework.stereotype.Controller;
