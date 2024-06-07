@@ -1,52 +1,39 @@
 package BackendC3.ClinicaOdontologica.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Paciente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
+
     private String apellido;
+
+    @Column(unique = true)
     private String cedula;
+
     private LocalDate fechaIngreso;
+
+    @OneToOne
+    @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
+
+    @Column(unique = true)
     private String email;
 
-    public Paciente(String nombre, String apellido, String cedula, LocalDate fechaIngreso, Domicilio domicilio, String email) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.cedula = cedula;
-        this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
-        this.email= email;
+    @PrePersist
+    public void fechaIngreso() {
+        this.fechaIngreso = LocalDate.now();
     }
 
-    public Paciente(Integer id, String nombre, String apellido, String cedula, LocalDate fechaIngreso, Domicilio domicilio, String email) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.cedula = cedula;
-        this.fechaIngreso = fechaIngreso;
-        this.domicilio = domicilio;
-        this.email= email;
-    }
-
-
-
-
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", cedula='" + cedula + '\'' +
-                ", fechaIngreso=" + fechaIngreso +
-                ", domicilio=" + domicilio +
-                '}';
-    }
 }
