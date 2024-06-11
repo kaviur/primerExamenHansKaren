@@ -1,7 +1,7 @@
 package BackendC3.ClinicaOdontologica;
 
 import BackendC3.ClinicaOdontologica.dao.BD;
-import BackendC3.ClinicaOdontologica.model.Paciente;
+import BackendC3.ClinicaOdontologica.entity.Paciente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,6 @@
 package BackendC3.ClinicaOdontologica.service;
 
 
-import BackendC3.ClinicaOdontologica.model.Odontologo;
-
 import java.util.List;
 
 public class OdontologoService {

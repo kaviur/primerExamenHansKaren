@@ -1,11 +1,7 @@
 package BackendC3.ClinicaOdontologica.controller;
 
-import BackendC3.ClinicaOdontologica.model.Paciente;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller //<-- es controller pq vamos a usar una tecnologia de vista
 @RequestMapping("/paciente")
