@@ -1,12 +1,13 @@
 package BackendC3.ClinicaOdontologica.service;
 
-
 import BackendC3.ClinicaOdontologica.entity.Odontologo;
 import BackendC3.ClinicaOdontologica.repository.IOdontologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OdontologoService implements ICrudService<Odontologo, Integer>  {
 
     @Autowired
