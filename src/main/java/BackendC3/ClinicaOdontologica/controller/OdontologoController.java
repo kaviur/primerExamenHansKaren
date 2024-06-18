@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/odontologos")
+@RequestMapping("/odontologo")
 public class OdontologoController {
 
     @Autowired
@@ -19,14 +19,15 @@ public class OdontologoController {
         return odontologoService.guardar(odontologo);
     }
 
-    @PutMapping("/actualizar")
+    @PutMapping
     public Odontologo actualizar(@RequestBody Odontologo odontologo){
         return odontologoService.actualizar(odontologo);
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Integer id){
+    @DeleteMapping("/delete/{id}")
+    public String eliminar(@PathVariable Integer id){
         odontologoService.eliminar(id);
+        return "El odontologo ha sido eliminado correctamente";
     }
 
     @GetMapping
