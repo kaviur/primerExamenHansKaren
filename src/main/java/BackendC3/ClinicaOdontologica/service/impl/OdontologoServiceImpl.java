@@ -1,15 +1,17 @@
-package BackendC3.ClinicaOdontologica.service;
+package BackendC3.ClinicaOdontologica.service.impl;
 
 import BackendC3.ClinicaOdontologica.entity.Odontologo;
-import BackendC3.ClinicaOdontologica.exceptions.customExceptions.NotFoundException;
+import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
 import BackendC3.ClinicaOdontologica.repository.IOdontologoRepository;
+import BackendC3.ClinicaOdontologica.service.ICrudService;
+import BackendC3.ClinicaOdontologica.service.IOdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class OdontologoService implements ICrudService<Odontologo, Integer>  {
+public class OdontologoServiceImpl implements IOdontologoService {
 
     @Autowired
     private IOdontologoRepository odontologoRepository;
@@ -17,7 +19,7 @@ public class OdontologoService implements ICrudService<Odontologo, Integer>  {
     @Override
     public Odontologo buscar(Integer id) {
         return odontologoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("No se encontro el odontologo con id " + id));
+                .orElseThrow(() -> new DomicilioNotFoundException("No se encontro el odontologo con id " + id));
     }
 
     @Override
@@ -51,11 +53,11 @@ public class OdontologoService implements ICrudService<Odontologo, Integer>  {
         try {
             List<Odontologo> odontologos = odontologoRepository.findAll();
             if (odontologos.isEmpty()) {
-                throw new NotFoundException("No se encontraron odontologos");
+                throw new DomicilioNotFoundException("No se encontraron odontologos");
             }
             return odontologos;
         } catch (Exception e) {
-            throw new NotFoundException("No se encontraron odontologos");
+            throw new DomicilioNotFoundException("No se encontraron odontologos");
         }
     }
 }

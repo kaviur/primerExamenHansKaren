@@ -6,7 +6,7 @@
 //import BackendC3.ClinicaOdontologica.entity.Odontologo;
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.Test;
-//import BackendC3.ClinicaOdontologica.service.OdontologoService;
+//import BackendC3.ClinicaOdontologica.service.impl.OdontologoService;
 //
 //import java.util.List;
 //

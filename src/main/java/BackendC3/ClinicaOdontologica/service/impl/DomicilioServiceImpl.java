@@ -1,15 +1,16 @@
-package BackendC3.ClinicaOdontologica.service;
+package BackendC3.ClinicaOdontologica.service.impl;
 
 import BackendC3.ClinicaOdontologica.entity.Domicilio;
-import BackendC3.ClinicaOdontologica.exceptions.customExceptions.NotFoundException;
+import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
 import BackendC3.ClinicaOdontologica.repository.IDomicilioRepository;
+import BackendC3.ClinicaOdontologica.service.IDomicilioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DomicilioService implements ICrudService<Domicilio, Integer> {
+public class DomicilioServiceImpl implements IDomicilioService {
 
     @Autowired
     private IDomicilioRepository domicilioRepository;
@@ -17,7 +18,7 @@ public class DomicilioService implements ICrudService<Domicilio, Integer> {
     @Override
     public Domicilio buscar(Integer id) {
         return domicilioRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("No se encontro el domicilio con id " + id));
+                .orElseThrow(() -> new DomicilioNotFoundException("No se encontro el domicilio con id " + id));
     }
 
     @Override
@@ -53,7 +54,7 @@ public class DomicilioService implements ICrudService<Domicilio, Integer> {
     public List<Domicilio> buscarTodos() {
         List<Domicilio> domicilios = domicilioRepository.findAll();
         if (domicilios.isEmpty()) {
-            throw new NotFoundException("No se encontraron domicilios");
+            throw new DomicilioNotFoundException("No se encontraron domicilios");
         }
         return domicilios;
     }

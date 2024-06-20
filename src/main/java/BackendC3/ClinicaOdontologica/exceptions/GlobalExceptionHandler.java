@@ -1,6 +1,6 @@
 package BackendC3.ClinicaOdontologica.exceptions;
 
-import BackendC3.ClinicaOdontologica.exceptions.customExceptions.NotFoundException;
+import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(DomicilioNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handlerNotFoundException(NotFoundException exception){
+    public ResponseEntity<String> handlerNotFoundException(DomicilioNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
