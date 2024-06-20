@@ -1,4 +1,4 @@
-package BackendC3.ClinicaOdontologica.model;
+package BackendC3.ClinicaOdontologica.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Paciente {
 
     @Id

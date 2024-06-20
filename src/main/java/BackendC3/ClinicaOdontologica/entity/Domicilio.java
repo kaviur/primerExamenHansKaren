@@ -1,4 +1,4 @@
-package BackendC3.ClinicaOdontologica.model;
+package BackendC3.ClinicaOdontologica.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
