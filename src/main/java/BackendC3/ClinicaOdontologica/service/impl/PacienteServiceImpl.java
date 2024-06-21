@@ -17,30 +17,23 @@ public class PacienteServiceImpl implements IPacienteService {
 
     private final IPacienteRepository pacienteRepository;
     private final PacienteMapper pacienteMapper;
-    public PacienteDto buscarPacientePorId(Integer id) {
+
+    @Override
+    public PacienteDto buscar(Integer id) {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new PacienteNotFoundException("Paciente no encontrado"));
 
         return PacienteMapper.toDto(paciente);
     }
 
-    public PacienteDto guardarPaciente(PacienteDto pacienteDto) {
+    @Override
+    public PacienteDto guardar(PacienteDto pacienteDto) {
         Paciente paciente = pacienteMapper.toEntity(pacienteDto);
         return PacienteMapper.toDto(pacienteRepository.save(paciente));
     }
 
     @Override
-    public Paciente buscar(Integer id) {
-        return null;
-    }
-
-    @Override
-    public Paciente guardar(Paciente paciente) {
-        return null;
-    }
-
-    @Override
-    public Paciente actualizar(Paciente paciente) {
+    public PacienteDto actualizar(PacienteDto pacienteDto) {
         return null;
     }
 
@@ -50,7 +43,8 @@ public class PacienteServiceImpl implements IPacienteService {
     }
 
     @Override
-    public List<Paciente> buscarTodos() {
-        return null;
+    public List<PacienteDto> buscarTodos() {
+        List<Paciente> pacientes = pacienteRepository.findAll();
+        return PacienteMapper.toDtoList(pacientes);
     }
 }

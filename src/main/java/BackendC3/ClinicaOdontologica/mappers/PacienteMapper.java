@@ -4,6 +4,8 @@ import BackendC3.ClinicaOdontologica.dto.PacienteDto;
 import BackendC3.ClinicaOdontologica.entity.Paciente;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class PacienteMapper {
 
@@ -25,5 +27,9 @@ public class PacienteMapper {
                 .cedula(pacienteDto.getCedula())
                 .email(pacienteDto.getEmail())
                 .build();
+    }
+
+    public static List<PacienteDto> toDtoList(List<Paciente> pacientes) {
+        return pacientes.stream().map(PacienteMapper::toDto).toList();
     }
 }
