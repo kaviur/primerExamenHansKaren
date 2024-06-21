@@ -34,12 +34,22 @@ public class PacienteServiceImpl implements IPacienteService {
 
     @Override
     public PacienteDto actualizar(PacienteDto pacienteDto) {
-        return null;
+        Paciente paciente = pacienteRepository.findById(pacienteDto.getId())
+                .orElseThrow(() -> new PacienteNotFoundException("Paciente no encontrado"));
+
+        paciente.setNombre(pacienteDto.getNombre());
+        paciente.setApellido(pacienteDto.getApellido());
+        paciente.setDni(pacienteDto.getDni());
+
+        return PacienteMapper.toDto(pacienteRepository.save(paciente));
     }
 
     @Override
     public void eliminar(Integer id) {
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new PacienteNotFoundException("Paciente no encontrado"));
 
+        pacienteRepository.delete(paciente);
     }
 
     @Override

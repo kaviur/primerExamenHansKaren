@@ -13,7 +13,6 @@ public class PacienteDto implements Serializable {
     Integer id;
     String nombre;
     String apellido;
-    String cedula;
+    String dni;
     Domicilio domicilio;
-    String email;
 }

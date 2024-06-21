@@ -14,9 +14,8 @@ public class PacienteMapper {
                 paciente.getId(),
                 paciente.getNombre(),
                 paciente.getApellido(),
-                paciente.getCedula(),
-                paciente.getDomicilio(),
-                paciente.getEmail()
+                paciente.getDni(),
+                paciente.getDomicilio()
         );
     }
 
@@ -24,8 +23,7 @@ public class PacienteMapper {
         return Paciente.builder()
                 .nombre(pacienteDto.getNombre())
                 .apellido((pacienteDto.getApellido()))
-                .cedula(pacienteDto.getCedula())
-                .email(pacienteDto.getEmail())
+                .dni(pacienteDto.getDni())
                 .build();
     }
 

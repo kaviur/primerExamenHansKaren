@@ -6,10 +6,7 @@ import BackendC3.ClinicaOdontologica.utils.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,27 @@ public class PacienteController {
     public ResponseEntity<Response> buscarPorId(@PathVariable Integer id){
         PacienteDto paciente = pacienteService.buscar(id);
         Response response = new Response(true, HttpStatus.OK, paciente);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<Response> guardar(@RequestBody PacienteDto pacienteDto){
+        PacienteDto paciente = pacienteService.guardar(pacienteDto);
+        Response response = new Response(true, HttpStatus.OK, paciente);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PutMapping
+    public ResponseEntity<Response> actualizar(@RequestBody PacienteDto pacienteDto){
+        PacienteDto paciente = pacienteService.actualizar(pacienteDto);
+        Response response = new Response(true, HttpStatus.OK, paciente);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response> eliminar(@PathVariable Integer id){
+        pacienteService.eliminar(id);
+        Response response = new Response(true, HttpStatus.OK, "Paciente eliminado con exito");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
