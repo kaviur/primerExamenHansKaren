@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Table(name = "pacientes")
 public class Paciente {
 
     @Id
@@ -20,7 +22,7 @@ public class Paciente {
     private String apellido;
 
     @Column(unique = true)
-    private String cedula;
+    private String dni;
 
     private LocalDate fechaIngreso;
 
@@ -28,8 +30,6 @@ public class Paciente {
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
-    @Column(unique = true)
-    private String email;
 
     @PrePersist
     public void fechaIngreso() {
