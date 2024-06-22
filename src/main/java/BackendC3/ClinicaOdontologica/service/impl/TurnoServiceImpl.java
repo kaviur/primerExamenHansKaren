@@ -1,6 +1,8 @@
 package BackendC3.ClinicaOdontologica.service.impl;
 
-import BackendC3.ClinicaOdontologica.dto.TurnoDto;
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputTurnoDto;
+import BackendC3.ClinicaOdontologica.dto.responseDtos.TurnoDto;
 import BackendC3.ClinicaOdontologica.entity.Odontologo;
 import BackendC3.ClinicaOdontologica.entity.Paciente;
 import BackendC3.ClinicaOdontologica.entity.Turno;
@@ -23,7 +25,7 @@ public class TurnoServiceImpl implements ITurnoService {
     private final IOdontologoRepository odontologoRepository;
 
     @Override
-    public TurnoDto buscar(Long id) {
+    public IDto buscar(Long id) {
         Turno turno = turnoRepository.findById(id)
                 .orElseThrow(() -> new TurnoNotFoundException("Turno no encontrado"));
 
@@ -32,11 +34,15 @@ public class TurnoServiceImpl implements ITurnoService {
     }
 
     @Override
-    public TurnoDto guardar(TurnoDto turnoDto) {
-        Paciente paciente = pacienteRepository.findById(turnoDto.getPaciente().getId())
+    public IDto guardar(IDto dto) {
+        if(!(dto instanceof InputTurnoDto turnoDto)){
+            throw new IllegalArgumentException("Entrada de datos incorrecta");
+        }
+
+        Paciente paciente = pacienteRepository.findById(turnoDto.getIdPaciente())
                 .orElseThrow(() -> new TurnoNotFoundException("Paciente no encontrado"));
 
-        Odontologo odontologo = odontologoRepository.findById(turnoDto.getOdontologo().getId())
+        Odontologo odontologo = odontologoRepository.findById(turnoDto.getIdOdontologo())
                 .orElseThrow(() -> new TurnoNotFoundException("Odontólogo no encontrado"));
 
         Turno turno = new Turno();
@@ -49,18 +55,20 @@ public class TurnoServiceImpl implements ITurnoService {
     }
 
     @Override
-    public TurnoDto actualizar(TurnoDto turnoDto, Long id) {
+    public IDto actualizar(IDto dto, Long id) {
+        if(!(dto instanceof TurnoDto turnoDto)){
+            throw new IllegalArgumentException("Entrada de datos incorrecta");
+        }
+
         Turno turno = turnoRepository.findById(id)
                 .orElseThrow(() -> new TurnoNotFoundException("Turno no encontrado"));
 
-        //verificar si el paciente es el mismo
         if(turnoDto.getPaciente().getId() != turno.getPaciente().getId()){
             Paciente paciente = pacienteRepository.findById(turnoDto.getPaciente().getId())
                     .orElseThrow(() -> new TurnoNotFoundException("Paciente no encontrado"));
             turno.setPaciente(paciente);
         }
 
-        //verificar si el odontologo es el mismo
         if(turnoDto.getOdontologo().getId() != turno.getOdontologo().getId()){
             Odontologo odontologo = odontologoRepository.findById(turnoDto.getOdontologo().getId())
                     .orElseThrow(() -> new TurnoNotFoundException("Odontólogo no encontrado"));
@@ -82,7 +90,7 @@ public class TurnoServiceImpl implements ITurnoService {
     }
 
     @Override
-    public List<TurnoDto> buscarTodos() {
+    public List<IDto> buscarTodos() {
         List<Turno> turnos = turnoRepository.findAll();
         //return TurnoMapper.toDtoList(turnos);
         return null;

@@ -19,9 +19,9 @@ public class OdontologoController {
         return odontologoService.guardar(odontologo);
     }
 
-    @PutMapping
-    public Odontologo actualizar(@RequestBody Odontologo odontologo){
-        return odontologoService.actualizar(odontologo);
+    @PutMapping("{id}")
+    public Odontologo actualizar(@RequestBody Odontologo odontologo, @PathVariable Integer id){
+        return odontologoService.actualizar(odontologo, id);
     }
 
     @DeleteMapping("/delete/{id}")

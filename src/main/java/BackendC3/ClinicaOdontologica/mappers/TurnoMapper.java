@@ -1,13 +1,11 @@
 package BackendC3.ClinicaOdontologica.mappers;
 
-import BackendC3.ClinicaOdontologica.dto.TurnoDto;
-import BackendC3.ClinicaOdontologica.entity.Turno;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TurnoMapper {
 
-//    public static TurnoDto toDto(Turno turno){
+//    public static IDto toDto(Turno turno){
 //        return new TurnoDto(
 //                OdontologoMapper.toDto(turno.getOdontologo()),
 //                PacienteMapper.toDto(turno.getPaciente())
