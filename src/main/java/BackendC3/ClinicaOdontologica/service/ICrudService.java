@@ -6,7 +6,7 @@ public interface ICrudService<T, I> {
 
     T buscar(I id);
     T guardar(T t);
-    T actualizar(T t);
+    T actualizar(T t, I id);
     void eliminar(I id);
     List<T> buscarTodos();
 

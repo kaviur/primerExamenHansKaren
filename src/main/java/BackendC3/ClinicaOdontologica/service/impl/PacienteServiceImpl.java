@@ -16,7 +16,6 @@ import java.util.List;
 public class PacienteServiceImpl implements IPacienteService {
 
     private final IPacienteRepository pacienteRepository;
-    private final PacienteMapper pacienteMapper;
 
     @Override
     public PacienteDto buscar(Integer id) {
@@ -28,13 +27,13 @@ public class PacienteServiceImpl implements IPacienteService {
 
     @Override
     public PacienteDto guardar(PacienteDto pacienteDto) {
-        Paciente paciente = pacienteMapper.toEntity(pacienteDto);
+        Paciente paciente = PacienteMapper.toEntity(pacienteDto);
         return PacienteMapper.toDto(pacienteRepository.save(paciente));
     }
 
     @Override
-    public PacienteDto actualizar(PacienteDto pacienteDto) {
-        Paciente paciente = pacienteRepository.findById(pacienteDto.getId())
+    public PacienteDto actualizar(PacienteDto pacienteDto, Integer id) {
+        Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new PacienteNotFoundException("Paciente no encontrado"));
 
         paciente.setNombre(pacienteDto.getNombre());

@@ -37,9 +37,9 @@ public class PacienteController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping
-    public ResponseEntity<Response> actualizar(@RequestBody PacienteDto pacienteDto){
-        PacienteDto paciente = pacienteService.actualizar(pacienteDto);
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> actualizar(@RequestBody PacienteDto pacienteDto, @RequestParam Integer id){
+        PacienteDto paciente = pacienteService.actualizar(pacienteDto, id);
         Response response = new Response(true, HttpStatus.OK, paciente);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
