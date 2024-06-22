@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -56,21 +57,21 @@ public class TurnoServiceImpl implements ITurnoService {
 
     @Override
     public IDto actualizar(IDto dto, Long id) {
-        if(!(dto instanceof TurnoDto turnoDto)){
+        if(!(dto instanceof InputTurnoDto turnoDto)){
             throw new IllegalArgumentException("Entrada de datos incorrecta");
         }
 
         Turno turno = turnoRepository.findById(id)
                 .orElseThrow(() -> new TurnoNotFoundException("Turno no encontrado"));
 
-        if(turnoDto.getPaciente().getId() != turno.getPaciente().getId()){
-            Paciente paciente = pacienteRepository.findById(turnoDto.getPaciente().getId())
+        if(!Objects.equals(turnoDto.getIdPaciente(), turno.getPaciente().getId())){
+            Paciente paciente = pacienteRepository.findById(turnoDto.getIdPaciente())
                     .orElseThrow(() -> new TurnoNotFoundException("Paciente no encontrado"));
             turno.setPaciente(paciente);
         }
 
-        if(turnoDto.getOdontologo().getId() != turno.getOdontologo().getId()){
-            Odontologo odontologo = odontologoRepository.findById(turnoDto.getOdontologo().getId())
+        if(!Objects.equals(turnoDto.getIdOdontologo(), turno.getOdontologo().getId())){
+            Odontologo odontologo = odontologoRepository.findById(turnoDto.getIdOdontologo())
                     .orElseThrow(() -> new TurnoNotFoundException("Odontólogo no encontrado"));
             turno.setOdontologo(odontologo);
         }

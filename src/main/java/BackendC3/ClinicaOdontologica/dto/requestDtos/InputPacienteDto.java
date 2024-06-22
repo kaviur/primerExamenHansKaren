@@ -2,6 +2,7 @@ package BackendC3.ClinicaOdontologica.dto.requestDtos;
 
 import BackendC3.ClinicaOdontologica.dto.IDto;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
 
@@ -24,9 +25,8 @@ public class InputPacienteDto implements Serializable, IDto {
     @NotEmpty(message = "La calle no puede estar vacía")
     String calle;
 
-    @NotEmpty(message = "El número no puede estar vacío")
-    @Size(min = 1, max = 5, message = "El número debe tener entre 1 y 5 caracteres")
-    int numero;
+    @NotNull(message = "El número no puede estar vacío")
+    Integer numero;
 
     @NotEmpty(message = "La localidad no puede estar vacía")
     String localidad;
