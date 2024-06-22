@@ -30,9 +30,9 @@ public class DomicilioController {
         return "El domicilio ha sido eliminado correctamente";
     }
 
-    @PutMapping
-    public Domicilio actualizar(@RequestBody Domicilio domicilio){
-        return domicilioService.actualizar(domicilio);
+    @PutMapping("{id}")
+    public Domicilio actualizar(@RequestBody Domicilio domicilio, @PathVariable Integer id){
+        return domicilioService.actualizar(domicilio,id);
     }
 
     @GetMapping

@@ -27,8 +27,8 @@ public class DomicilioServiceImpl implements IDomicilioService {
     }
 
     @Override
-    public Domicilio actualizar(Domicilio domicilio) {
-        Domicilio domicilioActual = buscar(domicilio.getId());
+    public Domicilio actualizar(Domicilio domicilio, Integer id) {
+        Domicilio domicilioActual = buscar(id);
         if (domicilio.getCalle() != null) {
             domicilioActual.setCalle(domicilio.getCalle());
         }

@@ -1,8 +1,10 @@
 package BackendC3.ClinicaOdontologica.controller;
 
-import BackendC3.ClinicaOdontologica.dto.PacienteDto;
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputPacienteDto;
 import BackendC3.ClinicaOdontologica.service.IPacienteService;
 import BackendC3.ClinicaOdontologica.utils.Response;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +20,28 @@ public class PacienteController {
 
     @GetMapping
     public ResponseEntity<Response> buscarTodos(){
-        List<PacienteDto> pacientes = pacienteService.buscarTodos();
+        List<IDto> pacientes = pacienteService.buscarTodos();
         Response response = new Response(true, HttpStatus.OK, pacientes);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Response> buscarPorId(@PathVariable Integer id){
-        PacienteDto paciente = pacienteService.buscar(id);
+        IDto paciente = pacienteService.buscar(id);
         Response response = new Response(true, HttpStatus.OK, paciente);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping
-    public ResponseEntity<Response> guardar(@RequestBody PacienteDto pacienteDto){
-        PacienteDto paciente = pacienteService.guardar(pacienteDto);
+    public ResponseEntity<Response> guardar(@Valid @RequestBody InputPacienteDto pacienteDto){
+        IDto paciente = pacienteService.guardar(pacienteDto);
         Response response = new Response(true, HttpStatus.OK, paciente);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PutMapping
-    public ResponseEntity<Response> actualizar(@RequestBody PacienteDto pacienteDto){
-        PacienteDto paciente = pacienteService.actualizar(pacienteDto);
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> actualizar(@Valid @RequestBody InputPacienteDto pacienteDto, @PathVariable Integer id){
+        IDto paciente = pacienteService.actualizar(pacienteDto, id);
         Response response = new Response(true, HttpStatus.OK, paciente);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

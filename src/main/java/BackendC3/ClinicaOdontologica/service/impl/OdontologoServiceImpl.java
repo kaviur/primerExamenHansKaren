@@ -29,8 +29,8 @@ public class OdontologoServiceImpl implements IOdontologoService {
     }
 
     @Override
-    public Odontologo actualizar(Odontologo odontologo) {
-        Odontologo odontologoActual = buscar(odontologo.getId());
+    public Odontologo actualizar(Odontologo odontologo, Integer id) {
+        Odontologo odontologoActual = buscar(id);
         if (odontologo.getNombre() != null) {
             odontologoActual.setNombre(odontologo.getNombre());
         }
