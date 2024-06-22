@@ -2,6 +2,7 @@ package BackendC3.ClinicaOdontologica.service.impl;
 
 import BackendC3.ClinicaOdontologica.entity.Odontologo;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
+import BackendC3.ClinicaOdontologica.exceptions.customExceptions.OdontologoNotFoundException;
 import BackendC3.ClinicaOdontologica.repository.IOdontologoRepository;
 import BackendC3.ClinicaOdontologica.service.ICrudService;
 import BackendC3.ClinicaOdontologica.service.IOdontologoService;
@@ -19,7 +20,7 @@ public class OdontologoServiceImpl implements IOdontologoService {
     @Override
     public Odontologo buscar(Integer id) {
         return odontologoRepository.findById(id)
-                .orElseThrow(() -> new DomicilioNotFoundException("No se encontro el odontologo con id " + id));
+                .orElseThrow(() -> new OdontologoNotFoundException("No se encontro el odontologo con id " + id));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class OdontologoServiceImpl implements IOdontologoService {
 
     @Override
     public Odontologo actualizar(Odontologo odontologo) {
-        Odontologo  odontologoActual = buscar(odontologo.getId());
+        Odontologo odontologoActual = buscar(odontologo.getId());
         if (odontologo.getNombre() != null) {
             odontologoActual.setNombre(odontologo.getNombre());
         }
@@ -50,14 +51,10 @@ public class OdontologoServiceImpl implements IOdontologoService {
 
     @Override
     public List<Odontologo> buscarTodos() {
-        try {
-            List<Odontologo> odontologos = odontologoRepository.findAll();
-            if (odontologos.isEmpty()) {
-                throw new DomicilioNotFoundException("No se encontraron odontologos");
-            }
-            return odontologos;
-        } catch (Exception e) {
-            throw new DomicilioNotFoundException("No se encontraron odontologos");
+        List<Odontologo> odontologos = odontologoRepository.findAll();
+        if (odontologos.isEmpty()) {
+            throw new OdontologoNotFoundException("No se encontraron odontologos");
         }
+        return odontologos;
     }
 }
