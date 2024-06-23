@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Dental</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .bg-opacity-50::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('/img/odontologia.jpg') center center / cover no-repeat;
+        opacity: 0.6; /* Change this value to adjust the opacity */
+        z-index: -1;
+      }
+    </style>
+    <script type="text/javascript" src="js/get_odontologos.js"></script>
+  </head>
+
+<body>
+    <header class=" bg-[#114455] text-white px-4 lg:px-6 h-14 flex items-center">
+    <a href="#" class="flex items-center justify-center">
+      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+        <line x1="9" y1="9" x2="9.01" y2="9" />
+        <line x1="15" y1="9" x2="15.01" y2="9" />
+      </svg>
+      <span class="font-bold text-lg ml-2">Clínica Dental</span>
+    </a>
+    <nav class="ml-auto flex gap-4 sm:gap-6 bg-info">
+      <a href="#" class="text-sm font-medium hover:underline underline-offset-4">Servicios</a>
+      <a href="#" class="text-sm font-medium hover:underline underline-offset-4">Cerrar sesión</a>
+      <a href="#" class="text-sm font-medium hover:underline underline-offset-4">Testimonios</a>
+    </nav>
+  </header>
+    <div class="divider"></div>
+
+    <h1 class="text-5xl font-bold text-center">Agregar Odontologo</h1>
+
+
+    <main class="my-8">
+        <div class="max-w-2xl mx-auto rounded-md overflow-hidden">
+            <form id="addOdontologoForm" class=" p-2 flex gap-5 flex-col">
+
+                <label class="input input-bordered flex items-center gap-2">
+                    Matrícula:
+                    <input id="odontologoMatricula" type="text" placeholder="547826" required />
+                </label>
+
+                <label class="input input-bordered flex items-center gap-2">
+                    Nombre:
+                    <input id="odontologoNombre" type="text" placeholder="Pedro" required />
+                </label>
+
+                <label class="input input-bordered flex items-center gap-2">
+                    Apellido:
+                    <input id="odontologoApellido" type="text" placeholder="Gómez" required />
+                </label>
+
+                <button type="submit" class="btn bg-[#EE964B] my-2 max-w-sm sm:px-24 mx-auto">Agregar Odontólogo</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="js/base.js"></script>
+    
+</body>
+
+</html>
