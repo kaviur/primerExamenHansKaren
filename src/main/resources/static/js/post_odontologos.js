@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", function () {
         apellido: document.getElementById("odontologoApellido").value,
       };
 
-      fetch("/odontologos", {
+      fetch("api/odontologo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

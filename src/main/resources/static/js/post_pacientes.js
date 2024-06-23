@@ -19,7 +19,7 @@ window.addEventListener("load", function () {
         email: document.getElementById("pacienteEmail").value,
       };
 
-      fetch("/pacientes", {
+      fetch("api/paciente", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

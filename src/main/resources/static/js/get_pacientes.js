@@ -2,7 +2,7 @@ window.addEventListener("load", function () {
   (function () {
     //con fetch invocamos a la API de pacientes con el método GET
     //nos devolverá un JSON con una colección de pacientes
-    const url = "/pacientes";
+    const url = "api/paciente";
     const settings = {
       method: "GET",
     };
@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
         for (let paciente of data) {
           console.log(paciente);
 
-          var table = document.getElementById("pacientesTableBody"); // Asegúrate de que este ID exista en tu HTML
+          var table = document.getElementById("pacientesTableBody");
           var pacienteRow = table.insertRow();
           let tr_id = paciente.id;
           pacienteRow.id = tr_id;
@@ -85,7 +85,7 @@ window.addEventListener("load", function () {
 
   // Función para eliminar el paciente
   function deletePaciente(id) {
-    const url = `/pacientes/${id}`;
+    const url = `api/paciente/${id}`;
     const settings = {
       method: "DELETE",
     };
@@ -125,7 +125,7 @@ window.addEventListener("load", function () {
 
   // Función para obtener los datos del paciente y mostrar el formulario de actualización
   window.findBy = function (id) {
-    const url = `/pacientes/${id}`;
+    const url = `api/paciente/${id}`;
     const settings = {
       method: "GET",
     };
@@ -157,7 +157,7 @@ window.addEventListener("load", function () {
   // Función para actualizar el paciente
   window.updatePaciente = function () {
     const id = document.getElementById("pacienteId").value
-    const url = `/pacientes`;
+    const url = `api/paciente`;
     const settings = {
       method: "PUT",
       headers: {

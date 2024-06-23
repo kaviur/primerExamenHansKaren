@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fecha: document.getElementById("turnoFecha").value,
       };
 
-      fetch("/turnos", {
+      fetch("api/turno", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

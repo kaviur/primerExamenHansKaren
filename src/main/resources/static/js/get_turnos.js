@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
   function loadTurnos () {
-    const url = "/turnos";
+    const url = "api/turno";
     const settings = {
       method: "GET",
     };
@@ -79,7 +79,7 @@ window.addEventListener("load", function () {
 
   // Función para eliminar el turno
   function deleteTurno(id) {
-    const url = `/turnos/${id}`;
+    const url = `api/turno/${id}`;
     const settings = {
       method: "DELETE",
     };
@@ -119,7 +119,7 @@ window.addEventListener("load", function () {
 
   // Función para obtener los datos del paciente y mostrar el formulario de actualización
   window.findBy = function (id) {
-    const url = `/turnos/${id}`;
+    const url = `api/turno/${id}`;
     const settings = {
       method: "GET",
     };
@@ -142,7 +142,7 @@ window.addEventListener("load", function () {
   // Función para actualizar el paciente
   window.updateTurno = function () {
     const id = document.getElementById("turnoId").value;
-    const url = `/turnos`;
+    const url = `api/turno`;
     const settings = {
       method: "PUT",
       headers: {

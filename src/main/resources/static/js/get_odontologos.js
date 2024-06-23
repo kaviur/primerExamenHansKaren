@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
   (function  () {
-    const url = "/odontologos";
+    const url = "api/odontologo";
     const settings = {
       method: "GET",
     };
@@ -82,7 +82,7 @@ window.addEventListener("load", function () {
 
   // Función para eliminar el odontólogo
   function deleteOdontologo(id) {
-    const url = `/odontologos/${id}`;
+    const url = `api/odontologo/${id}`;
     const settings = {
       method: "DELETE",
     };
@@ -123,7 +123,7 @@ window.addEventListener("load", function () {
 
   // Función para obtener los datos del paciente y mostrar el formulario de actualización
   window.findBy = function (id) {
-    const url = `/odontologos/${id}`;
+    const url = `api/odontologo/${id}`;
     const settings = {
       method: "GET",
     };
@@ -146,7 +146,7 @@ window.addEventListener("load", function () {
   // Función para actualizar el paciente
   function updateOdontologo () {
     const id = document.getElementById("odontologoId").value;
-    const url = `/odontologos`;
+    const url = `api/odontologo`;
     const settings = {
       method: "PUT",
       headers: {
