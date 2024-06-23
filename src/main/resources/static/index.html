@@ -65,13 +65,14 @@
                 <input id="password" type="password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
               </div>
               <div>
-                <select class="w-[180px]">
-                    <option>Selecciona tu rol</option>
-                    <option value="admin">Administrador</option>
-                    <option value="user">Usuario</option>
-                    <option value="dentist">Odontólogo</option>
-                    <option value="patient">Paciente</option>
-                  </select>
+                <label for="role" class="block text-sm font-medium text-gray-700">Selecciona tu rol</label>
+                <select id="role" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
+                  <option value="">Selecciona tu rol</option>
+                  <option value="admin">Administrador</option>
+                  <option value="user">Usuario</option>
+                  <option value="dentist">Odontólogo</option>
+                  <option value="patient">Paciente</option>
+                </select>
               </div>
               <button type="submit" class="w-full bg-[#EE964B] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#114455]">Iniciar Sesión</button>
             </form>
@@ -161,5 +162,37 @@
       <a href="#" class="text-xs hover:underline underline-offset-4">Política de Privacidad</a>
     </nav>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var roleSelect = document.getElementById('role');
+      var emailInput = document.getElementById('email');
+      var passwordInput = document.getElementById('password');
+
+      roleSelect.addEventListener('change', function() {
+        switch (this.value) {
+          case 'admin':
+            emailInput.value = 'admin@gmail.com';
+            passwordInput.value = 'admin';
+            break;
+          case 'user':
+            emailInput.value = 'user@gmail.com';
+            passwordInput.value = 'user';
+            break;
+          case 'dentist':
+            emailInput.value = 'odontologo@gmail.com';
+            passwordInput.value = 'odontologo';
+            break;
+          case 'patient':
+            emailInput.value = 'paciente@gmail.com';
+            passwordInput.value = 'paciente';
+            break;
+          default:
+            emailInput.value = '';
+            passwordInput.value = '';
+            break;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
