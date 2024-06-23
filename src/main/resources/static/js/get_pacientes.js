@@ -166,15 +166,11 @@ window.addEventListener("load", function () {
         nombre: document.getElementById("pacienteNombre").value,
         apellido: document.getElementById("pacienteApellido").value,
         cedula: document.getElementById("pacienteCedula").value,
-        fechaIngreso: document.getElementById("pacienteFechaIngreso").value,
-        domicilio: {
-          id: id,
-          calle: document.getElementById("pacienteDomicilioCalle").value,
-          numero: document.getElementById("pacienteDomicilioNumero").value,
-          localidad: document.getElementById("pacienteDomicilioLocalidad").value,
-          provincia: document.getElementById("pacienteDomicilioProvincia").value,
-        },
         email: document.getElementById("pacienteEmail").value,
+        calle: document.getElementById("pacienteDomicilioCalle").value,
+        numero: document.getElementById("pacienteDomicilioNumero").value,
+        localidad: document.getElementById("pacienteDomicilioLocalidad").value,
+        provincia: document.getElementById("pacienteDomicilioProvincia").value
       }),
     };
 

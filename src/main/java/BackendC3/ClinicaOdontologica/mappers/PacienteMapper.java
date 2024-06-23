@@ -17,8 +17,8 @@ public class PacienteMapper {
                 paciente.getId(),
                 paciente.getNombre(),
                 paciente.getApellido(),
-                paciente.getEmail(),
                 paciente.getCedula(),
+                paciente.getEmail(),
                 paciente.getDomicilio()
         );
     }
