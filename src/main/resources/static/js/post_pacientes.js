@@ -1,47 +1,53 @@
 window.addEventListener("load", function () {
-  // Agregar Paciente
-  document
-    .getElementById("addPacienteForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
+  document.getElementById("addPacienteForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      const paciente = {
-        nombre: document.getElementById("pacienteNombre").value,
-        apellido: document.getElementById("pacienteApellido").value,
-        cedula: document.getElementById("pacienteCedula").value,
-        fechaIngreso: document.getElementById("pacienteFechaIngreso").value,
-        domicilio: {
-          calle: document.getElementById("pacienteDomicilioCalle").value,
-          numero: document.getElementById("pacienteDomicilioNumero").value,
-          localidad: document.getElementById("pacienteDomicilioLocalidad").value,
-          provincia: document.getElementById("pacienteDomicilioProvincia").value
-        },
-        email: document.getElementById("pacienteEmail").value,
-      };
+    const paciente = {
+      nombre: document.getElementById("pacienteNombre").value,
+      apellido: document.getElementById("pacienteApellido").value,
+      cedula: document.getElementById("pacienteCedula").value,
+      email: document.getElementById("pacienteEmail").value,
+      calle: document.getElementById("pacienteDomicilioCalle").value,
+      numero: document.getElementById("pacienteDomicilioNumero").value,
+      localidad: document.getElementById("pacienteDomicilioLocalidad").value,
+      provincia: document.getElementById("pacienteDomicilioProvincia").value
+    };
 
-      fetch("api/paciente", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(paciente),
+    fetch("api/paciente", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(paciente),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((data) => {
+            if (data.errors && data.errors.length > 0) {
+              const errorMessage = data.errors.join("<br>");
+              showAlert(errorMessage, "error");
+            } else {
+              showAlert("Error al agregar el Paciente", "error");
+            }
+            throw new Error("Error al agregar el paciente"); // Lanza un error para que se capture en el siguiente .catch
+          });
+        }
+        return response.json();
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error al agregar el Paciente");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Paciente agregado:", data);
-          showAlert("Paciente agregado exitosamente");
-          // Aquí puedes agregar el código para actualizar la interfaz de usuario si es necesario
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          showAlert("Error al agregar el Paciente", "error");
-        });
-    });
+      .then((data) => {
+        console.log("Paciente agregado:", data);
+        showAlert("Paciente agregado exitosamente");
+
+        // Redirigir al listado de pacientes después de un breve retraso
+        setTimeout(() => {
+          window.location.href = "get_pacientes.html";
+        }, 1000); // Redirige después de 1 segundo (1000 milisegundos)
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        showAlert("Error al agregar el Paciente", "error");
+      });
+  });
 
   // Función para mostrar el alert
   function showAlert(message, type = "success") {

@@ -48,6 +48,7 @@ public class PacienteServiceImpl implements IPacienteService {
         paciente.setNombre(pacienteDto.getNombre());
         paciente.setApellido(pacienteDto.getApellido());
         paciente.setCedula(pacienteDto.getCedula());
+        paciente.setEmail(pacienteDto.getEmail());
 
         //update domicilio
         paciente.getDomicilio().setCalle(pacienteDto.getCalle());

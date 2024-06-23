@@ -24,14 +24,15 @@ public class Paciente {
     @Column(unique = true)
     private String cedula;
 
+    @Column(unique = true)
+    private String email;
+
     private LocalDate fechaIngreso;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
-    @Column(unique = true)
-    private String email;
     @PrePersist
     public void fechaIngreso() {
         this.fechaIngreso = LocalDate.now();

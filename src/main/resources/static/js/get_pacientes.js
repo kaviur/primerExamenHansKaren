@@ -155,14 +155,13 @@ window.addEventListener("load", function () {
   // Función para actualizar el paciente
   window.updatePaciente = function () {
     const id = document.getElementById("pacienteId").value;
-    const url = `api/paciente`;
+    const url =`api/paciente/${id}`;
     const settings = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: id,
         nombre: document.getElementById("pacienteNombre").value,
         apellido: document.getElementById("pacienteApellido").value,
         cedula: document.getElementById("pacienteCedula").value,
@@ -182,14 +181,20 @@ window.addEventListener("load", function () {
           updateTableRow(id);
           closeUpdateModal();
         } else {
-          console.error(`Error al actualizar paciente con ID ${id}.`);
-          showAlert("Error al actualizar el Paciente", "error");
+          return response.json().then((data) => {
+              if (data.errors && data.errors.length > 0) {
+                  const errorMessage = data.errors.join("<br>");
+                  showAlert(errorMessage, "error");
+              } else {
+                  showAlert("Error al actualizar el Paciente", "error");
+              }
+          });
         }
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.error(`Error al actualizar paciente con ID ${id}:`, error);
         showAlert("Error al actualizar el Paciente", "error");
-      });
+    });
   };
 
   // Función para actualizar la fila de la tabla
