@@ -17,7 +17,8 @@ public class PacienteMapper {
                 paciente.getId(),
                 paciente.getNombre(),
                 paciente.getApellido(),
-                paciente.getDni(),
+                paciente.getEmail(),
+                paciente.getCedula(),
                 paciente.getDomicilio()
         );
     }
@@ -32,7 +33,8 @@ public class PacienteMapper {
         return Paciente.builder()
                 .nombre(inputPacienteDto.getNombre())
                 .apellido(inputPacienteDto.getApellido())
-                .dni(inputPacienteDto.getDni())
+                .cedula(inputPacienteDto.getCedula())
+                .email(inputPacienteDto.getEmail())
                 .domicilio(domicilio)
                 .build();
     }

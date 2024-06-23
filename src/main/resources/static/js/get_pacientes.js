@@ -1,7 +1,5 @@
 window.addEventListener("load", function () {
   (function () {
-    //con fetch invocamos a la API de pacientes con el método GET
-    //nos devolverá un JSON con una colección de pacientes
     const url = "api/paciente";
     const settings = {
       method: "GET",
@@ -10,45 +8,45 @@ window.addEventListener("load", function () {
     fetch(url, settings)
       .then((response) => response.json())
       .then((data) => {
-        for (let paciente of data) {
-          console.log(paciente);
+        if (data.success && data.data && Array.isArray(data.data)) {
+          for (let paciente of data.data) {
+            console.log(paciente);
 
-          var table = document.getElementById("pacientesTableBody");
-          var pacienteRow = table.insertRow();
-          let tr_id = paciente.id;
-          pacienteRow.id = tr_id;
+            var table = document.getElementById("pacientesTableBody");
+            var pacienteRow = table.insertRow();
+            let tr_id = paciente.id;
+            pacienteRow.id = tr_id;
 
-          const deleteButton = createButton(
-            `btn_delete_${paciente.id}`,
-            "btn btn-circle btn-error",
-            `deleteBy(${paciente.id})`,
-            `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12"/>
-            </svg>`
-          );
+            const deleteButton = createButton(
+              `btn_delete_${paciente.id}`,
+              "btn btn-circle btn-error",
+              `deleteBy(${paciente.id})`,
+              `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12"/>
+              </svg>`
+            );
 
-          const updateButton = createButton(
-            `btn_id_${paciente.id}`,
-            "btn btn-circle btn-success mr-4",
-            `findBy(${paciente.id})`,
-            `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
-            </svg>`
-          );
+            const updateButton = createButton(
+              `btn_id_${paciente.id}`,
+              "btn btn-circle btn-success mr-4",
+              `findBy(${paciente.id})`,
+              `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+              </svg>`
+            );
 
-          pacienteRow.innerHTML = `
-          <td>${paciente.id}</td>
-          <td class="nombre">${paciente.nombre}</td>
-          <td class="apellido">${paciente.apellido}</td>
-          <td class="cedula">${paciente.cedula}</td>
-          <td class="domicilio">${paciente.domicilio.calle}, ${
-            paciente.domicilio.numero
-          }, ${paciente.domicilio.localidad}, ${
-            paciente.domicilio.provincia
-          }</td>
-          <td class="email">${paciente.email}</td>
-          <td>${updateButton}${deleteButton}</td>
-        `;
+            pacienteRow.innerHTML = `
+              <td>${paciente.id}</td>
+              <td class="nombre">${paciente.nombre}</td>
+              <td class="apellido">${paciente.apellido}</td>
+              <td class="cedula">${paciente.cedula || ''}</td>
+              <td class="domicilio">${paciente.domicilio.calle}, ${paciente.domicilio.numero}, ${paciente.domicilio.localidad}, ${paciente.domicilio.provincia}</td>
+              <td class="email">${paciente.email || ''}</td>
+              <td>${updateButton}${deleteButton}</td>
+            `;
+          }
+        } else {
+          console.error('Invalid data format or no data found');
         }
       })
       .catch((error) =>
@@ -133,21 +131,21 @@ window.addEventListener("load", function () {
     fetch(url, settings)
       .then((response) => response.json())
       .then((data) => {
-        // Aquí llenamos el formulario con los datos del paciente para actualizar
-        document.getElementById("pacienteId").value = data.id;
-        document.getElementById("pacienteNombre").value = data.nombre;
-        document.getElementById("pacienteApellido").value = data.apellido;
-        document.getElementById("pacienteCedula").value = data.cedula;
-        document.getElementById("pacienteEmail").value = data.email;
-        document.getElementById("pacienteDomicilioCalle").value =
-          data.domicilio.calle;
-        document.getElementById("pacienteDomicilioNumero").value =
-          data.domicilio.numero;
-        document.getElementById("pacienteDomicilioLocalidad").value =
-          data.domicilio.localidad;
-        document.getElementById("pacienteDomicilioProvincia").value =
-          data.domicilio.provincia;
-        showUpdateModal();
+        if (data.success && data.data) {
+          // Aquí llenamos el formulario con los datos del paciente para actualizar
+          document.getElementById("pacienteId").value = data.data.id;
+          document.getElementById("pacienteNombre").value = data.data.nombre;
+          document.getElementById("pacienteApellido").value = data.data.apellido;
+          document.getElementById("pacienteCedula").value = data.data.cedula || '';
+          document.getElementById("pacienteEmail").value = data.data.email || '';
+          document.getElementById("pacienteDomicilioCalle").value = data.data.domicilio.calle;
+          document.getElementById("pacienteDomicilioNumero").value = data.data.domicilio.numero;
+          document.getElementById("pacienteDomicilioLocalidad").value = data.data.domicilio.localidad;
+          document.getElementById("pacienteDomicilioProvincia").value = data.data.domicilio.provincia;
+          showUpdateModal();
+        } else {
+          console.error('Invalid data format or no data found');
+        }
       })
       .catch((error) =>
         console.error(`Error al obtener paciente con ID ${id}:`, error)
@@ -156,7 +154,7 @@ window.addEventListener("load", function () {
 
   // Función para actualizar el paciente
   window.updatePaciente = function () {
-    const id = document.getElementById("pacienteId").value
+    const id = document.getElementById("pacienteId").value;
     const url = `api/paciente`;
     const settings = {
       method: "PUT",
@@ -164,7 +162,7 @@ window.addEventListener("load", function () {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: id , 
+        id: id,
         nombre: document.getElementById("pacienteNombre").value,
         apellido: document.getElementById("pacienteApellido").value,
         cedula: document.getElementById("pacienteCedula").value,
@@ -202,16 +200,12 @@ window.addEventListener("load", function () {
   function updateTableRow(id) {
     const row = document.getElementById(id);
     if (row) {
-      row.querySelector(".nombre").textContent =
-        document.getElementById("pacienteNombre").value;
-      row.querySelector(".apellido").textContent =
-        document.getElementById("pacienteApellido").value;
-      row.querySelector(".cedula").textContent =
-        document.getElementById("pacienteCedula").value;
-      row.querySelector(".email").textContent =
-        document.getElementById("pacienteEmail").value;
-      row.querySelector(".domicilio").textContent = 
-      `${document.getElementById("pacienteDomicilioCalle").value}, ${document.getElementById("pacienteDomicilioNumero").value}, ${document.getElementById("pacienteDomicilioLocalidad").value}, ${document.getElementById("pacienteDomicilioProvincia").value}`;
+      row.querySelector(".nombre").textContent = document.getElementById("pacienteNombre").value;
+      row.querySelector(".apellido").textContent = document.getElementById("pacienteApellido").value;
+      row.querySelector(".cedula").textContent = document.getElementById("pacienteCedula").value || '';
+      row.querySelector(".email").textContent = document.getElementById("pacienteEmail").value || '';
+      row.querySelector(".domicilio").textContent =
+        `${document.getElementById("pacienteDomicilioCalle").value}, ${document.getElementById("pacienteDomicilioNumero").value}, ${document.getElementById("pacienteDomicilioLocalidad").value}, ${document.getElementById("pacienteDomicilioProvincia").value}`;
     }
   }
 
