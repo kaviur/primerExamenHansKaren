@@ -13,7 +13,6 @@ window.addEventListener("load", function () {
             console.log(turno)
 
             const table = document.getElementById("turnosTableBody");
-            table.innerHTML = ""; // Limpiar la tabla antes de agregar las filas
             const turnoRow = table.insertRow();
             let tr_id = turno.id;
             turnoRow.id = tr_id;
@@ -111,7 +110,7 @@ window.addEventListener("load", function () {
     updateModal.close();
   }
 
-  updateCancelButton.addEventListener("click", closeUpdateModal);
+  //updateCancelButton.addEventListener("click", closeUpdateModal);
 
   window.findBy = function (id) {
     const url = `api/turno/${id}`;
@@ -122,10 +121,12 @@ window.addEventListener("load", function () {
     fetch(url, settings)
       .then((response) => response.json())
       .then((data) => {
+        console.log(JSON.stringify(data.data, null, 2));
+
         document.getElementById("turnoId").value = data.data.id;
-        document.getElementById("turnoPacienteId").value = data.data.paciente.id;
-        document.getElementById("turnoOdontologoId").value = data.data.odontologo.id;
-        document.getElementById("turnoFecha").value = data.data.fecha;
+        document.getElementById("paciente").value = data.data.paciente.id;
+        document.getElementById("odontologo").value = data.data.odontologo.id;
+        document.getElementById("fecha").value = data.data.fecha;
         showUpdateModal();
       })
       .catch((error) =>
@@ -143,9 +144,9 @@ window.addEventListener("load", function () {
       },
       body: JSON.stringify({
         id: id,
-        paciente: { id: document.getElementById("turnoPacienteId").value },
-        odontologo: { id: document.getElementById("turnoOdontologoId").value },
-        fecha: document.getElementById("turnoFecha").value,
+        paciente: { id: document.getElementById("paciente").value },
+        odontologo: { id: document.getElementById("odontologo").value },
+        fecha: document.getElementById("fecha").value,
       }),
     };
 

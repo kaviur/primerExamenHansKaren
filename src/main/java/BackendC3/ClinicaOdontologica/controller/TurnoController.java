@@ -4,6 +4,7 @@ import BackendC3.ClinicaOdontologica.dto.IDto;
 import BackendC3.ClinicaOdontologica.dto.requestDtos.InputTurnoDto;
 import BackendC3.ClinicaOdontologica.service.ITurnoService;
 import BackendC3.ClinicaOdontologica.utils.Response;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/turno")
 @RequiredArgsConstructor
+@Tag(name = "Turno", description = "Operaciones relacionadas con los turnos")
 public class TurnoController {
     private final ITurnoService turnoService;
 
@@ -25,28 +27,28 @@ public class TurnoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response> buscarPorId(Long id){
+    public ResponseEntity<Response> buscarPorId(@PathVariable Long id){
         IDto turno = turnoService.buscar(id);
         Response response = new Response(true, HttpStatus.OK, turno);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<Response> guardar(InputTurnoDto turnoDto){
+    public ResponseEntity<Response> guardar(@RequestBody InputTurnoDto turnoDto){
         IDto turno = turnoService.guardar(turnoDto);
         Response response = new Response(true, HttpStatus.OK, turno);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response> actualizar(@PathVariable Long id, InputTurnoDto turnoDto){
+    public ResponseEntity<Response> actualizar(@PathVariable Long id, @RequestBody InputTurnoDto turnoDto){
         IDto turno = turnoService.actualizar(turnoDto, id);
         Response response = new Response(true, HttpStatus.OK, turno);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> eliminar(Long id){
+    public ResponseEntity<Response> eliminar(@PathVariable Long id){
         turnoService.eliminar(id);
         Response response = new Response(true, HttpStatus.OK, "Turno eliminado con exito");
         return ResponseEntity.ok(response);
