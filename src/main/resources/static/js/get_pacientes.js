@@ -93,8 +93,12 @@ window.addEventListener("load", function () {
         document.getElementById(id).remove();
         showAlert("Paciente eliminado exitosamente");
       } else {
-        console.error(`Error al eliminar paciente con ID ${id}.`);
-        showAlert("Error al eliminar el paciente", "error");
+        if (response.errors && response.errors.length > 0) {
+          const errorMessage = response.errors.join("<br>");
+          showAlert(errorMessage, "error");
+        } else {
+          showAlert("No es posible eliminar el Paciente, tiene citas asignadas", "error");
+        }
       }
     });
   }

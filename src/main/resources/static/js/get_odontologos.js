@@ -108,8 +108,12 @@ window.addEventListener("load", function () {
         document.getElementById(id).remove(); // Eliminar la fila de la tabla
         showAlert('Odontólogo eliminado exitosamente');
       } else {
-        console.error(`Error al eliminar odontólogo con ID ${id}.`);
-        showAlert('Error al eliminar el odontólogo', 'error');
+        if (response.errors && response.errors.length > 0) {
+          const errorMessage = response.errors.join("<br>");
+          showAlert(errorMessage, "error");
+        } else {
+          showAlert("No es posible eliminar el odontólogo, tiene turnos asignados", "error");
+        }
       }
     });
   }
