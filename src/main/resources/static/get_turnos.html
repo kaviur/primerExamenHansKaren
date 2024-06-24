@@ -89,19 +89,22 @@
 
             <form id="updateTurnoForm" class="p-2 flex gap-3 flex-col">
                 <input id="turnoId" type="number" class="hidden" />
-
-                <label class="input input-bordered flex items-center gap-2">
-                    ID Paciente:
-                    <input id="turnoPacienteId" type="number" class="grow" placeholder="123" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2">
-                    ID Odontologo:
-                    <input id="turnoOdontologoId" type="number" class="grow" placeholder="123" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2">
-                    <input type="date" id="turnoFecha" class="grow" placeholder="Fecha" required />
-                </label>
-
+                <div>
+                    <label for="paciente" class="block text-sm font-medium text-gray-700">Selecciona un Paciente</label>
+                    <select id="paciente" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                      <option value="">Cargando pacientes...</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="odontologo" class="block text-sm font-medium text-gray-700">Selecciona un Odontólogo</label>
+                    <select id="odontologo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                      <option value="">Cargando odontólogos...</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+                    <input type="datetime-local" id="fecha" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                </div>
                 <div class="modal-action">
                     <button type="button" id="updateCancelButton" class="btn btn-warning">Cancelar</button>
                     <button vtype="submit" id="updateConfirmButton" class="btn btn-success">Actualizar</button>
@@ -109,6 +112,8 @@
             </form>
         </div>
     </dialog>
+
+    <script type="text/javascript" src="js/base.js"></script>
 
 
     <script type="text/javascript" src="js/base.js"></script>

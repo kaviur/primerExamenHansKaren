@@ -67,6 +67,10 @@
                         <option value="">Cargando odontólogos...</option>
                       </select>
                     </div>
+                    <div>
+                      <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+                      <input type="datetime-local" id="fecha" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" required>
+                    </div>
                     <button type="submit" class="w-full bg-[#EE964B] text-white py-2 px-4 rounded-md shadow-sm hover:bg-[#114455]">Crear Turno</button>
                 </form>
         </div>
@@ -88,7 +92,7 @@
                   selectElement.innerHTML = `<option value="">${defaultText}</option>`;
                   data.data.forEach(item => {
                     const option = document.createElement('option');
-                    option.value = `${item.nombre} ${item.apellido}`; 
+                    option.value = item.id; 
                     option.textContent = `${item.nombre} ${item.apellido}`;
                     selectElement.appendChild(option);
                   });

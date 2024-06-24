@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Agregar Turno
   document
-    .getElementById("addTurnoForm")
+    .getElementById("turno-form")
     .addEventListener("submit", function (event) {
       event.preventDefault();
       const turno = {
-        paciente: { id: document.getElementById("turnoPacienteId").value },
-        odontologo: { id: document.getElementById("turnoOdontologoId").value },
-        fecha: document.getElementById("turnoFecha").value,
+        idPaciente: document.getElementById("paciente").value,
+        idOdontologo: document.getElementById("odontologo").value,
+        fecha: document.getElementById("fecha").value // "2024-06-23T15:30"
       };
 
       fetch("api/turno", {
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
               const errorMessage = data.errors.join("<br>");
               showAlert(errorMessage, "error");
             } else {
-              showAlert("Error al agregar el Paciente", "error");
+              showAlert("Error al agregar el turno", "error");
             }
-            throw new Error("Error al agregar el paciente");
+            throw new Error("Error al agregar el turno");
           });
         }
         return response.json();
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showAlert("Turno agregado exitosamente");
 
         setTimeout(() => {
-          window.location.href = "get_pacientes.html";
+          window.location.href = "get_turnos.html";
         }, 1000); 
       })
       .catch((error) => {

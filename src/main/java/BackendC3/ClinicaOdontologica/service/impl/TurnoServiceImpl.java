@@ -6,13 +6,16 @@ import BackendC3.ClinicaOdontologica.entity.Odontologo;
 import BackendC3.ClinicaOdontologica.entity.Paciente;
 import BackendC3.ClinicaOdontologica.entity.Turno;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.TurnoNotFoundException;
+import BackendC3.ClinicaOdontologica.mappers.TurnoMapper;
 import BackendC3.ClinicaOdontologica.repository.IOdontologoRepository;
 import BackendC3.ClinicaOdontologica.repository.IPacienteRepository;
 import BackendC3.ClinicaOdontologica.repository.ITurnoRepository;
 import BackendC3.ClinicaOdontologica.service.ITurnoService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,14 +32,16 @@ public class TurnoServiceImpl implements ITurnoService {
         Turno turno = turnoRepository.findById(id)
                 .orElseThrow(() -> new TurnoNotFoundException("Turno no encontrado"));
 
-        //return TurnoMapper.toDto(turno);
-        return null;
+        return TurnoMapper.toDto(turno);
     }
 
     @Override
     public IDto guardar(IDto dto) {
         if(!(dto instanceof InputTurnoDto turnoDto)){
             throw new IllegalArgumentException("Entrada de datos incorrecta");
+        }
+        if(turnoDto.getIdPaciente() == null || turnoDto.getIdOdontologo() == null || turnoDto.getFecha() == null){
+            throw new ServiceException("Faltan datos");
         }
 
         Paciente paciente = pacienteRepository.findById(turnoDto.getIdPaciente())
@@ -48,10 +53,9 @@ public class TurnoServiceImpl implements ITurnoService {
         Turno turno = new Turno();
         turno.setPaciente(paciente);
         turno.setOdontologo(odontologo);
-        turno.setFecha(turnoDto.getFecha());
+        turno.setFecha(LocalDateTime.parse(turnoDto.getFecha()));
 
-        //return TurnoMapper.toDto(turnoRepository.save(turno));
-        return null;
+        return TurnoMapper.toDto(turnoRepository.save(turno));
     }
 
     @Override
@@ -75,10 +79,9 @@ public class TurnoServiceImpl implements ITurnoService {
             turno.setOdontologo(odontologo);
         }
 
-        turno.setFecha(turnoDto.getFecha());
+        turno.setFecha(LocalDateTime.parse(turnoDto.getFecha()));
 
-        //return TurnoMapper.toDto(turnoRepository.save(turno));
-        return null;
+        return TurnoMapper.toDto(turnoRepository.save(turno));
     }
 
     @Override
@@ -92,7 +95,6 @@ public class TurnoServiceImpl implements ITurnoService {
     @Override
     public List<IDto> buscarTodos() {
         List<Turno> turnos = turnoRepository.findAll();
-        //return TurnoMapper.toDtoList(turnos);
-        return null;
+        return TurnoMapper.toDtoList(turnos);
     }
 }

@@ -15,5 +15,5 @@ public class TurnoDto implements Serializable, IDto {
     Integer id;
     OdontologoDto odontologo;
     PacienteDto paciente;
-    LocalDateTime fecha;
+    String fecha;
 }
