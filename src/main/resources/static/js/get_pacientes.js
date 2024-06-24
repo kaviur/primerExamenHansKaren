@@ -40,6 +40,7 @@ window.addEventListener("load", function () {
               <td class="nombre">${paciente.nombre}</td>
               <td class="apellido">${paciente.apellido}</td>
               <td class="cedula">${paciente.cedula || ''}</td>
+              <td class="fecha-ingreso">${paciente.fechaIngreso}</td>
               <td class="domicilio">${paciente.domicilio.calle}, ${paciente.domicilio.numero}, ${paciente.domicilio.localidad}, ${paciente.domicilio.provincia}</td>
               <td class="email">${paciente.email || ''}</td>
               <td>${updateButton}${deleteButton}</td>
@@ -62,7 +63,7 @@ window.addEventListener("load", function () {
   const deleteModal = document.getElementById("deleteModal");
   const confirmDeleteButton = document.getElementById("confirmDeleteButton");
   const cancelDeleteButton = document.getElementById("cancelDeleteButton");
-  let pacienteIdToDelete = null; // Para almacenar el ID del paciente a eliminar
+  let pacienteIdToDelete = null;
 
   cancelDeleteButton.addEventListener("click", () => {
     deleteModal.close();
@@ -75,13 +76,12 @@ window.addEventListener("load", function () {
     }
   });
 
-  // Función para mostrar el modal de confirmación
   function showDeleteModal(id) {
     pacienteIdToDelete = id;
     deleteModal.showModal();
   }
 
-  // Función para eliminar el paciente
+
   function deletePaciente(id) {
     const url = `api/paciente/${id}`;
     const settings = {
@@ -91,7 +91,7 @@ window.addEventListener("load", function () {
     fetch(url, settings).then((response) => {
       if (response.ok) {
         console.log(`Paciente con ID ${id} eliminado.`);
-        document.getElementById(id).remove(); // Eliminar la fila de la tabla
+        document.getElementById(id).remove();
         showAlert("Paciente eliminado exitosamente");
       } else {
         console.error(`Error al eliminar paciente con ID ${id}.`);
@@ -105,16 +105,13 @@ window.addEventListener("load", function () {
     showDeleteModal(id);
   };
 
-  // Manejo del modal de confirmación
   const updateModal = document.getElementById("updateModal");
   const updateCancelButton = document.getElementById("updateCancelButton");
 
-  // Función para mostrar el modal
   function showUpdateModal() {
     updateModal.showModal();
   }
 
-  // Función para cerrar el modal
   function closeUpdateModal() {
     updateModal.close();
   }
@@ -152,7 +149,7 @@ window.addEventListener("load", function () {
       );
   };
 
-  // Función para actualizar el paciente
+ 
   window.updatePaciente = function () {
     const id = document.getElementById("pacienteId").value;
     const url =`api/paciente/${id}`;

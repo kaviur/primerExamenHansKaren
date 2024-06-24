@@ -26,6 +26,8 @@ public class InputPacienteDto implements Serializable, IDto {
     @Size(min = 3, max = 50, message = "El email debe tener entre 3 y 50 caracteres")
     String email;
 
+    String fechaIngreso;
+
     @NotEmpty(message = "La calle no puede estar vacía")
     String calle;
 

@@ -7,6 +7,7 @@ window.addEventListener("load", function () {
       apellido: document.getElementById("pacienteApellido").value,
       cedula: document.getElementById("pacienteCedula").value,
       email: document.getElementById("pacienteEmail").value,
+      fechaIngreso: document.getElementById("pacienteFechaIngreso").value,
       calle: document.getElementById("pacienteDomicilioCalle").value,
       numero: document.getElementById("pacienteDomicilioNumero").value,
       localidad: document.getElementById("pacienteDomicilioLocalidad").value,
@@ -29,7 +30,7 @@ window.addEventListener("load", function () {
             } else {
               showAlert("Error al agregar el Paciente", "error");
             }
-            throw new Error("Error al agregar el paciente"); // Lanza un error para que se capture en el siguiente .catch
+            throw new Error("Error al agregar el paciente");
           });
         }
         return response.json();
@@ -38,10 +39,9 @@ window.addEventListener("load", function () {
         console.log("Paciente agregado:", data);
         showAlert("Paciente agregado exitosamente");
 
-        // Redirigir al listado de pacientes después de un breve retraso
         setTimeout(() => {
           window.location.href = "get_pacientes.html";
-        }, 1000); // Redirige después de 1 segundo (1000 milisegundos)
+        }, 1000); 
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -49,7 +49,7 @@ window.addEventListener("load", function () {
       });
   });
 
-  // Función para mostrar el alert
+  
   function showAlert(message, type = "success") {
     const alertContainer = document.createElement("div");
     alertContainer.className = `toast toast-top toast-end`;
@@ -63,7 +63,6 @@ window.addEventListener("load", function () {
 
     document.body.appendChild(alertContainer);
 
-    // Remover el alert después de 3 segundos
     setTimeout(() => {
       alertContainer.remove();
     }, 3000);

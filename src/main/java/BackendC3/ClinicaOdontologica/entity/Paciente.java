@@ -33,9 +33,9 @@ public class Paciente {
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
-    @PrePersist
-    public void fechaIngreso() {
-        this.fechaIngreso = LocalDate.now();
-    }
+//    @PrePersist
+//    public void fechaIngreso() {
+//        this.fechaIngreso = LocalDate.now();
+//    }
 
 }
