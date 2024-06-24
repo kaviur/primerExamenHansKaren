@@ -22,7 +22,10 @@ public class Paciente {
     private String apellido;
 
     @Column(unique = true)
-    private String dni;
+    private String cedula;
+
+    @Column(unique = true)
+    private String email;
 
     private LocalDate fechaIngreso;
 
@@ -30,10 +33,9 @@ public class Paciente {
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
 
-
-    @PrePersist
-    public void fechaIngreso() {
-        this.fechaIngreso = LocalDate.now();
-    }
+//    @PrePersist
+//    public void fechaIngreso() {
+//        this.fechaIngreso = LocalDate.now();
+//    }
 
 }

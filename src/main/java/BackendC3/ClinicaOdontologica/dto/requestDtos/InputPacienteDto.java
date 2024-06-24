@@ -20,7 +20,13 @@ public class InputPacienteDto implements Serializable, IDto {
 
     @NotEmpty(message = "El DNI no puede estar vacío")
     @Size(min = 7, max = 12, message = "El DNI debe tener entre 7 y 12 caracteres")
-    String dni;
+    String cedula;
+
+    @NotEmpty(message = "El email no puede estar vacío")
+    @Size(min = 3, max = 50, message = "El email debe tener entre 3 y 50 caracteres")
+    String email;
+
+    String fechaIngreso;
 
     @NotEmpty(message = "La calle no puede estar vacía")
     String calle;

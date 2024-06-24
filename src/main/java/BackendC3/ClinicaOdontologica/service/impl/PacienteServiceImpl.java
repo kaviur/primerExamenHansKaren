@@ -47,7 +47,14 @@ public class PacienteServiceImpl implements IPacienteService {
 
         paciente.setNombre(pacienteDto.getNombre());
         paciente.setApellido(pacienteDto.getApellido());
-        paciente.setDni(pacienteDto.getDni());
+        paciente.setCedula(pacienteDto.getCedula());
+        paciente.setEmail(pacienteDto.getEmail());
+
+        //update domicilio
+        paciente.getDomicilio().setCalle(pacienteDto.getCalle());
+        paciente.getDomicilio().setNumero(pacienteDto.getNumero());
+        paciente.getDomicilio().setLocalidad(pacienteDto.getLocalidad());
+        paciente.getDomicilio().setProvincia(pacienteDto.getProvincia());
 
         return PacienteMapper.toDto(pacienteRepository.save(paciente));
     }

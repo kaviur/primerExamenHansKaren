@@ -14,6 +14,8 @@ public class PacienteDto implements Serializable, IDto {
     Integer id;
     String nombre;
     String apellido;
-    String dni;
+    String cedula;
+    String email;
+    String fechaIngreso;
     Domicilio domicilio;
 }
