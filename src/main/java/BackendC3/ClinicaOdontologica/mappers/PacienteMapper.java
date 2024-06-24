@@ -7,6 +7,7 @@ import BackendC3.ClinicaOdontologica.entity.Domicilio;
 import BackendC3.ClinicaOdontologica.entity.Paciente;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -17,7 +18,9 @@ public class PacienteMapper {
                 paciente.getId(),
                 paciente.getNombre(),
                 paciente.getApellido(),
-                paciente.getDni(),
+                paciente.getCedula(),
+                paciente.getEmail(),
+                paciente.getFechaIngreso().toString(),
                 paciente.getDomicilio()
         );
     }
@@ -32,7 +35,9 @@ public class PacienteMapper {
         return Paciente.builder()
                 .nombre(inputPacienteDto.getNombre())
                 .apellido(inputPacienteDto.getApellido())
-                .dni(inputPacienteDto.getDni())
+                .cedula(inputPacienteDto.getCedula())
+                .email(inputPacienteDto.getEmail())
+                .fechaIngreso(LocalDate.parse(inputPacienteDto.getFechaIngreso()))
                 .domicilio(domicilio)
                 .build();
     }

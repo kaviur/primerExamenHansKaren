@@ -2,7 +2,6 @@ package BackendC3.ClinicaOdontologica.service.impl;
 
 import BackendC3.ClinicaOdontologica.dto.IDto;
 import BackendC3.ClinicaOdontologica.dto.requestDtos.InputTurnoDto;
-import BackendC3.ClinicaOdontologica.dto.responseDtos.TurnoDto;
 import BackendC3.ClinicaOdontologica.entity.Odontologo;
 import BackendC3.ClinicaOdontologica.entity.Paciente;
 import BackendC3.ClinicaOdontologica.entity.Turno;
