@@ -18,9 +18,12 @@ window.addEventListener("load", function () {
 
           data.data.forEach((odontologo) => {
             console.log(odontologo);
+            console.log("matricula")
+            console.log(odontologo.numeroMatricula)
 
             const odontologoRow = table.insertRow();
-            odontologoRow.id = odontologo.id;
+            let tr_id = odontologo.id;
+            odontologoRow.id = tr_id;
 
             const deleteButton = createButton(
               `btn_delete_${odontologo.id}`,
@@ -94,7 +97,7 @@ window.addEventListener("load", function () {
 
   // Función para eliminar el odontólogo
   function deleteOdontologo(id) {
-    const url = `api/odontologo/${id}`;
+    const url = `api/odontologo/delete/${id}`;
     const settings = {
       method: "DELETE",
     };
