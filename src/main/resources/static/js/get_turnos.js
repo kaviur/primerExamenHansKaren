@@ -112,28 +112,66 @@ window.addEventListener("load", function () {
 
   //updateCancelButton.addEventListener("click", closeUpdateModal);
 
-  window.findBy = function (id) {
+  const pacienteSelect = document.getElementById('paciente');
+  const odontologoSelect = document.getElementById('odontologo');
+
+  // Function to populate select options
+  const populateSelect = async (selectElement, url, defaultText) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+
+      // Check if data has 'data' property and it's an array
+      if (data && Array.isArray(data.data)) {
+        selectElement.innerHTML = `<option value="">${defaultText}</option>`;
+        data.data.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item.id;
+          option.textContent = `${item.nombre} ${item.apellido}`;
+          selectElement.appendChild(option);
+        });
+      } else {
+        throw new Error('Invalid data format from API');
+      }
+    } catch (error) {
+      selectElement.innerHTML = `<option value="">Error loading data</option>`;
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  // Function to find and populate the form
+  window.findBy = async function (id) {
     const url = `api/turno/${id}`;
     const settings = {
       method: "GET",
     };
 
-    fetch(url, settings)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(JSON.stringify(data.data, null, 2));
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
 
-        document.getElementById("turnoId").value = data.data.id;
-        document.getElementById("paciente").value = data.data.paciente.id;
-        document.getElementById("odontologo").value = data.data.odontologo.id;
-        document.getElementById("fecha").value = data.data.fecha;
-        showUpdateModal();
-      })
-      .catch((error) =>
-        console.error(`Error al obtener turno con ID ${id}:`, error)
-      );
+      // Wait for selects to be populated before setting values
+      await Promise.all([
+        populateSelect(pacienteSelect, '/api/paciente', 'Selecciona un Paciente'),
+        populateSelect(odontologoSelect, '/api/odontologo', 'Selecciona un Odontólogo')
+      ]);
+
+      document.getElementById("turnoId").value = data.data.id;
+      pacienteSelect.value = data.data.paciente.id;
+      odontologoSelect.value = data.data.odontologo.id;
+      document.getElementById("fecha").value = data.data.fecha;
+      showUpdateModal();
+    } catch (error) {
+      console.error(`Error al obtener turno con ID ${id}:`, error);
+    }
   };
 
+  // Populate select elements initially
+  populateSelect(pacienteSelect, '/api/paciente', 'Selecciona un Paciente');
+  populateSelect(odontologoSelect, '/api/odontologo', 'Selecciona un Odontólogo');
+
+  //update turno
   window.updateTurno = function () {
     const id = document.getElementById("turnoId").value;
     const url = `api/turno/${id}`;
@@ -144,11 +182,16 @@ window.addEventListener("load", function () {
       },
       body: JSON.stringify({
         id: id,
-        paciente: { id: document.getElementById("paciente").value },
-        odontologo: { id: document.getElementById("odontologo").value },
+        idPaciente: document.getElementById("paciente").value,
+        idOdontologo: document.getElementById("odontologo").value,
         fecha: document.getElementById("fecha").value,
       }),
     };
+
+    console.log("settings-----")
+    console.log(settings);
+    console.log(JSON.stringify(settings))
+
 
     fetch(url, settings)
       .then((response) => {
