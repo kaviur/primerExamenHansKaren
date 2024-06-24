@@ -1,7 +1,6 @@
 package BackendC3.ClinicaOdontologica.dto.responseDtos;
 
 import BackendC3.ClinicaOdontologica.dto.IDto;
-import BackendC3.ClinicaOdontologica.dto.OdontologoDto;
 import BackendC3.ClinicaOdontologica.entity.Turno;
 import lombok.Value;
 

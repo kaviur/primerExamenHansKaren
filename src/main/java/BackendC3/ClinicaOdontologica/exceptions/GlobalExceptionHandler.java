@@ -1,5 +1,6 @@
 package BackendC3.ClinicaOdontologica.exceptions;
 
+import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.PacienteNotFoundException;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.TurnoNotFoundException;
 import BackendC3.ClinicaOdontologica.utils.Response;
@@ -8,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.HibernateException;
 import org.hibernate.QueryTimeoutException;
 import org.hibernate.service.spi.ServiceException;
-import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -33,7 +33,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
             PacienteNotFoundException.class,
-            TurnoNotFoundException.class
+            TurnoNotFoundException.class,
+            DomicilioNotFoundException.class
     })
     public ResponseEntity<Object> handleCustomExceptions(Exception ex) {
         List<String> errorMessages = List.of(ex.getMessage());

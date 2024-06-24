@@ -1,8 +1,13 @@
 package BackendC3.ClinicaOdontologica.controller;
 
-import BackendC3.ClinicaOdontologica.entity.Domicilio;
-import BackendC3.ClinicaOdontologica.service.ICrudService;
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputDomicilioDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputPacienteDto;
+import BackendC3.ClinicaOdontologica.service.IDomicilioService;
+import BackendC3.ClinicaOdontologica.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,31 +17,36 @@ import java.util.List;
 public class DomicilioController {
 
     @Autowired
-    ICrudService <Domicilio, Integer> domicilioService;
+    IDomicilioService domicilioService;
 
     @PostMapping
-    public Domicilio guardar(@RequestBody Domicilio domicilio){
-        return domicilioService.guardar(domicilio);
+    public ResponseEntity<Response> guardar(@RequestBody InputDomicilioDto domicilio) {
+        Response response = new Response(true, HttpStatus.OK, domicilioService.guardar(domicilio));
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public Domicilio buscar(@PathVariable Integer id){
-        return domicilioService.buscar(id);
+    public ResponseEntity<Response> buscar(@PathVariable Integer id) {
+        Response response = new Response(true, HttpStatus.OK, domicilioService.buscar(id));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("delete/{id}")
-    public String eliminar(@PathVariable Integer id){
+    public ResponseEntity<Response> eliminar(@PathVariable Integer id) {
         domicilioService.eliminar(id);
-        return "El domicilio ha sido eliminado correctamente";
+        Response response = new Response(true, HttpStatus.OK, "El domicilio ha sido eliminado correctamente");
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("{id}")
-    public Domicilio actualizar(@RequestBody Domicilio domicilio, @PathVariable Integer id){
-        return domicilioService.actualizar(domicilio,id);
+    public ResponseEntity<Response> actualizar(@RequestBody InputDomicilioDto domicilio, @PathVariable Integer id) {
+        Response response = new Response(true, HttpStatus.OK, domicilioService.actualizar(domicilio, id));
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public List<Domicilio> buscarTodos(){
-        return domicilioService.buscarTodos();
+    public ResponseEntity<Response> buscarTodos() {
+        Response response = new Response(true, HttpStatus.OK, domicilioService.buscarTodos());
+        return ResponseEntity.ok(response);
     }
 }

@@ -1,5 +1,6 @@
-package BackendC3.ClinicaOdontologica.dto;
+package BackendC3.ClinicaOdontologica.dto.responseDtos;
 
+import BackendC3.ClinicaOdontologica.dto.IDto;
 import lombok.Data;
 import lombok.Value;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
 public class DomicilioDto implements Serializable, IDto {
     Integer id;
     String calle;
-    int numero;
+    Integer numero;
     String localidad;
     String provincia;
 }

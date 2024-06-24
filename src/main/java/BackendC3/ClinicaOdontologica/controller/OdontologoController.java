@@ -1,8 +1,12 @@
 package BackendC3.ClinicaOdontologica.controller;
 
-import BackendC3.ClinicaOdontologica.entity.Odontologo;
-import BackendC3.ClinicaOdontologica.service.ICrudService;
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputOdontologoDto;
+import BackendC3.ClinicaOdontologica.service.IOdontologoService;
+import BackendC3.ClinicaOdontologica.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,31 +16,36 @@ import java.util.List;
 public class OdontologoController {
 
     @Autowired
-    private ICrudService <Odontologo, Integer> odontologoService;
+    IOdontologoService odontologoService;
 
     @PostMapping
-    public Odontologo guardar(@RequestBody Odontologo odontologo){
-        return odontologoService.guardar(odontologo);
+    public ResponseEntity<Response> guardar(@RequestBody InputOdontologoDto odontologo) {
+        Response response = new Response(true, HttpStatus.OK, odontologoService.guardar(odontologo));
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("{id}")
-    public Odontologo actualizar(@RequestBody Odontologo odontologo, @PathVariable Integer id){
-        return odontologoService.actualizar(odontologo, id);
+    public ResponseEntity<Response> actualizar(@RequestBody InputOdontologoDto odontologo, @PathVariable Integer id) {
+        Response response = new Response(true, HttpStatus.OK, odontologoService.actualizar(odontologo, id));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String eliminar(@PathVariable Integer id){
+    public ResponseEntity<Response> eliminar(@PathVariable Integer id) {
         odontologoService.eliminar(id);
-        return "El odontologo ha sido eliminado correctamente";
+        Response response = new Response(true, HttpStatus.OK, "Odontologo eliminado con éxito");
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public List<Odontologo> buscarTodos(){
-        return odontologoService.buscarTodos();
+    public ResponseEntity<Response> buscarTodos() {
+        Response response = new Response(true, HttpStatus.OK, odontologoService.buscarTodos());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public Odontologo buscarPorId(@PathVariable Integer id){
-        return odontologoService.buscar(id);
+    public ResponseEntity<Response> buscarPorId(@PathVariable Integer id) {
+        Response response = new Response(true, HttpStatus.OK, odontologoService.buscar(id));
+        return ResponseEntity.ok(response);
     }
 }
