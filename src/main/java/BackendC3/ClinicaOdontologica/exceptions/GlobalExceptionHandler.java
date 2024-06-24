@@ -1,6 +1,7 @@
 package BackendC3.ClinicaOdontologica.exceptions;
 
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
+import BackendC3.ClinicaOdontologica.exceptions.customExceptions.OdontologoNotFoundException;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.PacienteNotFoundException;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.TurnoNotFoundException;
 import BackendC3.ClinicaOdontologica.utils.Response;
@@ -34,7 +35,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             PacienteNotFoundException.class,
             TurnoNotFoundException.class,
-            DomicilioNotFoundException.class
+            DomicilioNotFoundException.class,
+            OdontologoNotFoundException.class
     })
     public ResponseEntity<Object> handleCustomExceptions(Exception ex) {
         List<String> errorMessages = List.of(ex.getMessage());

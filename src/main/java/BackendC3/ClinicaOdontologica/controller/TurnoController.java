@@ -53,4 +53,18 @@ public class TurnoController {
         Response response = new Response(true, HttpStatus.OK, "Turno eliminado con exito");
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/paciente/{id}")
+    public ResponseEntity<Response> buscarTurnosPorPaciente(@PathVariable Long id){
+        List<IDto> turnos = turnoService.buscarTurnosPorPaciente(id);
+        Response response = new Response(true, HttpStatus.OK, turnos);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/odontologo/{id}")
+    public ResponseEntity<Response> buscarTurnosPorOdontologo(@PathVariable Long id){
+        List<IDto> turnos = turnoService.buscarTurnosPorOdontologo(id);
+        Response response = new Response(true, HttpStatus.OK, turnos);
+        return ResponseEntity.ok(response);
+    }
 }

@@ -97,4 +97,28 @@ public class TurnoServiceImpl implements ITurnoService {
         List<Turno> turnos = turnoRepository.findAll();
         return TurnoMapper.toDtoList(turnos);
     }
+
+    @Override
+    public List<IDto> buscarTurnosPorPaciente(Long idPaciente) {
+        int pacienteId = Math.toIntExact(idPaciente);
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new TurnoNotFoundException("Paciente no encontrado"));
+        List<Turno> turnos = turnoRepository.findAllByPacienteId(idPaciente);
+        if(turnos.isEmpty()){
+            throw new TurnoNotFoundException("El paciente no tiene turnos");
+        }
+        return TurnoMapper.toDtoList(turnos);
+    }
+
+    @Override
+    public List<IDto> buscarTurnosPorOdontologo(Long idOdontologo) {
+        int odontologoId = Math.toIntExact(idOdontologo);
+        Odontologo odontologo = odontologoRepository.findById(odontologoId)
+                .orElseThrow(() -> new TurnoNotFoundException("Odontólogo no encontrado"));
+        List<Turno> turnos = turnoRepository.findAllByOdontologoId(idOdontologo);
+        if(turnos.isEmpty()){
+            throw new TurnoNotFoundException("El odontólogo no tiene turnos");
+        }
+        return TurnoMapper.toDtoList(turnos);
+    }
 }
