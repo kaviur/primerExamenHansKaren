@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", function () {
     .addEventListener("submit", function (event) {
       event.preventDefault();
       const odontologo = {
-        matricula: document.getElementById("odontologoMatricula").value,
+        numeroMatricula: document.getElementById("odontologoMatricula").value,
         nombre: document.getElementById("odontologoNombre").value,
         apellido: document.getElementById("odontologoApellido").value,
       };
@@ -19,13 +19,24 @@ window.addEventListener("DOMContentLoaded", function () {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Error al agregar el odontólogo");
+            return response.json().then((data) => {
+              if (data.errors && data.errors.length > 0) {
+                const errorMessage = data.errors.join("<br>");
+                showAlert(errorMessage, "error");
+              } else {
+                showAlert("Error al agregar el Paciente", "error");
+              }
+              throw new Error("Error al agregar el paciente");
+            });
           }
           return response.json();
         })
         .then((data) => {
           console.log("Odontólogo agregado:", data);
           showAlert("Odontólogo agregado exitosamente");
+          setTimeout(() => {
+            window.location.href = "get_odontologos.html";
+          }, 1000); 
         })
         .catch((error) => {
           console.error("Error:", error);
