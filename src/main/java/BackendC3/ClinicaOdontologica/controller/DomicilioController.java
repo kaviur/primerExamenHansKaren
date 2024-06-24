@@ -1,7 +1,7 @@
 package BackendC3.ClinicaOdontologica.controller;
 
-import BackendC3.ClinicaOdontologica.entity.Domicilio;
-import BackendC3.ClinicaOdontologica.service.ICrudService;
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.service.IDomicilioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,31 +12,31 @@ import java.util.List;
 public class DomicilioController {
 
     @Autowired
-    ICrudService <Domicilio, Integer> domicilioService;
+    IDomicilioService domicilioService;
 
     @PostMapping
-    public Domicilio guardar(@RequestBody Domicilio domicilio){
+    public IDto guardar(@RequestBody IDto domicilio) {
         return domicilioService.guardar(domicilio);
     }
 
     @GetMapping("/{id}")
-    public Domicilio buscar(@PathVariable Integer id){
+    public IDto buscar(@PathVariable Integer id) {
         return domicilioService.buscar(id);
     }
 
     @DeleteMapping("delete/{id}")
-    public String eliminar(@PathVariable Integer id){
+    public String eliminar(@PathVariable Integer id) {
         domicilioService.eliminar(id);
         return "El domicilio ha sido eliminado correctamente";
     }
 
     @PutMapping("{id}")
-    public Domicilio actualizar(@RequestBody Domicilio domicilio, @PathVariable Integer id){
-        return domicilioService.actualizar(domicilio,id);
+    public IDto actualizar(@RequestBody IDto domicilio, @PathVariable Integer id) {
+        return domicilioService.actualizar(domicilio, id);
     }
 
     @GetMapping
-    public List<Domicilio> buscarTodos(){
+    public List<IDto> buscarTodos() {
         return domicilioService.buscarTodos();
     }
 }

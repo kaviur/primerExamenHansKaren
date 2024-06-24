@@ -1,12 +1,16 @@
 package BackendC3.ClinicaOdontologica.mappers;
 
-import BackendC3.ClinicaOdontologica.dto.DomicilioDto;
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputDomicilioDto;
+import BackendC3.ClinicaOdontologica.dto.responseDtos.DomicilioDto;
 import BackendC3.ClinicaOdontologica.entity.Domicilio;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+import java.util.List;
+
+@Component
 public class DomicilioMapper {
-    public static DomicilioDto toDto(Domicilio domicilio){
+    public static IDto toDto(Domicilio domicilio){
         return new DomicilioDto(
                 domicilio.getId(),
                 domicilio.getCalle(),
@@ -16,7 +20,7 @@ public class DomicilioMapper {
         );
     }
 
-    public static Domicilio toEntity(DomicilioDto domicilioDto){
+    public static Domicilio toEntity(InputDomicilioDto domicilioDto){
         return Domicilio.builder()
                 .calle(domicilioDto.getCalle())
                 .numero(domicilioDto.getNumero())
@@ -24,4 +28,9 @@ public class DomicilioMapper {
                 .provincia(domicilioDto.getProvincia())
                 .build();
     }
+
+    public static List<IDto> mapList(List<Domicilio> domicilios) {
+        return domicilios.stream().map(DomicilioMapper::toDto).toList();
+    }
+
 }

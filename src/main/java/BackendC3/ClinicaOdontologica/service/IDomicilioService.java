@@ -1,6 +1,6 @@
 package BackendC3.ClinicaOdontologica.service;
 
-import BackendC3.ClinicaOdontologica.entity.Domicilio;
+import BackendC3.ClinicaOdontologica.dto.IDto;
 
-public interface IDomicilioService extends ICrudService<Domicilio, Integer> {
+public interface IDomicilioService extends ICrudService<IDto, Integer> {
 }

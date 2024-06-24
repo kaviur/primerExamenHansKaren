@@ -21,11 +21,20 @@ public class InitialData implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         String password = passwordEncoder.encode("user");
-        Usuario user = new Usuario("John", "JohnDoe", "johndoe@gmail.com", password, Role.ROLE_USER);
+        Usuario user = new Usuario("User", "User", "user@gmail.com", password, Role.ROLE_USER);
         userRepository.save(user);
 
-        password = passwordEncoder.encode("admin");
-        Usuario admin = new Usuario("Admin", "Admin", "admin@gmail.com", password, Role.ROLE_ADMIN);
+        String passwordAdmin = passwordEncoder.encode("admin");
+        Usuario admin = new Usuario("Admin", "Admin", "admin@gmail.com", passwordAdmin, Role.ROLE_ADMIN);
         userRepository.save(admin);
+
+        String  passwordOdontologo = passwordEncoder.encode("odontologo");
+        Usuario odontologo = new Usuario("Odontologo", "Odontologo", "odontologo@gmail.com", passwordOdontologo, Role.ROLE_ODONTOLOGO);
+        userRepository.save(odontologo);
+
+        String passwordPaciente = passwordEncoder.encode("paciente");
+        Usuario paciente = new Usuario("Paciente", "Paciente", "paciente@gmail.com", passwordPaciente, Role.ROLE_PACIENTE);
+        userRepository.save(paciente);
+
     }
 }

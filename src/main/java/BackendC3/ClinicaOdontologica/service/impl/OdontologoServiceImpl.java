@@ -1,10 +1,11 @@
 package BackendC3.ClinicaOdontologica.service.impl;
 
+import BackendC3.ClinicaOdontologica.dto.IDto;
+import BackendC3.ClinicaOdontologica.dto.requestDtos.InputOdontologoDto;
 import BackendC3.ClinicaOdontologica.entity.Odontologo;
-import BackendC3.ClinicaOdontologica.exceptions.customExceptions.DomicilioNotFoundException;
 import BackendC3.ClinicaOdontologica.exceptions.customExceptions.OdontologoNotFoundException;
+import BackendC3.ClinicaOdontologica.mappers.OdontologoMapper;
 import BackendC3.ClinicaOdontologica.repository.IOdontologoRepository;
-import BackendC3.ClinicaOdontologica.service.ICrudService;
 import BackendC3.ClinicaOdontologica.service.IOdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,43 +19,54 @@ public class OdontologoServiceImpl implements IOdontologoService {
     private IOdontologoRepository odontologoRepository;
 
     @Override
-    public Odontologo buscar(Integer id) {
-        return odontologoRepository.findById(id)
+    public IDto buscar(Integer id) {
+        Odontologo odontologo = odontologoRepository.findById(id)
                 .orElseThrow(() -> new OdontologoNotFoundException("No se encontro el odontologo con id " + id));
+        return OdontologoMapper.toDto(odontologo);
     }
 
     @Override
-    public Odontologo guardar(Odontologo odontologo) {
-        return odontologoRepository.save(odontologo);
+    public IDto guardar(IDto odontologo) {
+        if (!(odontologo instanceof InputOdontologoDto odontolgoDto)) {
+            throw new IllegalArgumentException("Entrada de datos incorrecta");
+        }
+        Odontologo odontologoGuardado = odontologoRepository.save(OdontologoMapper.toEntity((InputOdontologoDto) odontologo));
+        return OdontologoMapper.toDto(odontologoGuardado);
     }
 
     @Override
-    public Odontologo actualizar(Odontologo odontologo, Integer id) {
-        Odontologo odontologoActual = buscar(id);
-        if (odontologo.getNombre() != null) {
-            odontologoActual.setNombre(odontologo.getNombre());
+    public IDto actualizar(IDto odontologo, Integer id) {
+        if(!(odontologo instanceof InputOdontologoDto odontologoDto)) {
+            throw new IllegalArgumentException("Entrada de datos incorrecta");
         }
-        if (odontologo.getApellido() != null) {
-            odontologoActual.setApellido(odontologo.getApellido());
+        Odontologo odontologoActual = odontologoRepository.findById(id)
+                .orElseThrow(() -> new OdontologoNotFoundException("No se encontro el odontologo con id " + id));
+        if (odontologoDto.getNombre() != null) {
+            odontologoActual.setNombre(odontologoDto.getNombre());
         }
-        if (odontologo.getNumeroMatricula() != null) {
-            odontologoActual.setNumeroMatricula(odontologo.getNumeroMatricula());
+        if (odontologoDto.getApellido() != null) {
+            odontologoActual.setApellido(odontologoDto.getApellido());
         }
-        return odontologoRepository.save(odontologoActual);
+        if (odontologoDto.getNumeroMatricula() != null) {
+            odontologoActual.setNumeroMatricula(odontologoDto.getNumeroMatricula());
+        }
+        odontologoRepository.save(odontologoActual);
+        return OdontologoMapper.toDto(odontologoActual);
     }
 
     @Override
     public void eliminar(Integer id) {
-        Odontologo odontologo = buscar(id);
+        Odontologo odontologo = odontologoRepository.findById(id)
+                        .orElseThrow(() -> new OdontologoNotFoundException("No se encontro el odontologo con id " + id));
         odontologoRepository.delete(odontologo);
     }
 
     @Override
-    public List<Odontologo> buscarTodos() {
+    public List<IDto> buscarTodos() {
         List<Odontologo> odontologos = odontologoRepository.findAll();
         if (odontologos.isEmpty()) {
             throw new OdontologoNotFoundException("No se encontraron odontologos");
         }
-        return odontologos;
+        return OdontologoMapper.mapList(odontologos);
     }
 }
