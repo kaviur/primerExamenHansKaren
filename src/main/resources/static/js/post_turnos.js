@@ -16,15 +16,28 @@ document.addEventListener("DOMContentLoaded", function () {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(turno),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al agregar el turno");
+          return response.json().then((data) => {
+            if (data.errors && data.errors.length > 0) {
+              const errorMessage = data.errors.join("<br>");
+              showAlert(errorMessage, "error");
+            } else {
+              showAlert("Error al agregar el Paciente", "error");
+            }
+            throw new Error("Error al agregar el paciente");
+          });
         }
         return response.json();
       })
       .then((data) => {
         console.log("Turno agregado:", data);
         showAlert("Turno agregado exitosamente");
+
+        setTimeout(() => {
+          window.location.href = "get_pacientes.html";
+        }, 1000); 
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -46,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.body.appendChild(alertContainer);
 
-    // Remover el alert después de 3 segundos
     setTimeout(() => {
       alertContainer.remove();
     }, 3000);

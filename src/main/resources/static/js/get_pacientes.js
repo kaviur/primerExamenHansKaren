@@ -59,7 +59,6 @@ window.addEventListener("load", function () {
     return `<button id="${id}" type="button" onclick="${onClick}" class="${className}">${innerHTML}</button>`;
   }
 
-  // Manejo del modal de confirmación
   const deleteModal = document.getElementById("deleteModal");
   const confirmDeleteButton = document.getElementById("confirmDeleteButton");
   const cancelDeleteButton = document.getElementById("cancelDeleteButton");
@@ -100,7 +99,6 @@ window.addEventListener("load", function () {
     });
   }
 
-  // Sobrescribir la función deleteBy para que muestre el modal de confirmación
   window.deleteBy = function (id) {
     showDeleteModal(id);
   };
@@ -118,7 +116,6 @@ window.addEventListener("load", function () {
 
   updateCancelButton.addEventListener("click", closeUpdateModal);
 
-  // Función para obtener los datos del paciente y mostrar el formulario de actualización
   window.findBy = function (id) {
     const url = `api/paciente/${id}`;
     const settings = {
@@ -129,7 +126,6 @@ window.addEventListener("load", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data.success && data.data) {
-          // Aquí llenamos el formulario con los datos del paciente para actualizar
           document.getElementById("pacienteId").value = data.data.id;
           document.getElementById("pacienteNombre").value = data.data.nombre;
           document.getElementById("pacienteApellido").value = data.data.apellido;

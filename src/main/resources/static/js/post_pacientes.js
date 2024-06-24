@@ -21,32 +21,32 @@ window.addEventListener("load", function () {
       },
       body: JSON.stringify(paciente),
     })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((data) => {
-            if (data.errors && data.errors.length > 0) {
-              const errorMessage = data.errors.join("<br>");
-              showAlert(errorMessage, "error");
-            } else {
-              showAlert("Error al agregar el Paciente", "error");
-            }
-            throw new Error("Error al agregar el paciente");
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Paciente agregado:", data);
-        showAlert("Paciente agregado exitosamente");
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          if (data.errors && data.errors.length > 0) {
+            const errorMessage = data.errors.join("<br>");
+            showAlert(errorMessage, "error");
+          } else {
+            showAlert("Error al agregar el Paciente", "error");
+          }
+          throw new Error("Error al agregar el paciente");
+        });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Paciente agregado:", data);
+      showAlert("Paciente agregado exitosamente");
 
-        setTimeout(() => {
-          window.location.href = "get_pacientes.html";
-        }, 1000); 
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        showAlert("Error al agregar el Paciente", "error");
-      });
+      setTimeout(() => {
+        window.location.href = "get_pacientes.html";
+      }, 1000); 
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      showAlert("Error al agregar el Paciente", "error");
+    });
   });
 
   
