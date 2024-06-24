@@ -16,7 +16,7 @@
         right: 0;
         bottom: 0;
         background: url('/img/odontologia.jpg') center center / cover no-repeat;
-        opacity: 0.6; /* Change this value to adjust the opacity */
+        opacity: 0.6; 
         z-index: -1;
       }
     </style>
@@ -88,8 +88,8 @@
                   selectElement.innerHTML = `<option value="">${defaultText}</option>`;
                   data.data.forEach(item => {
                     const option = document.createElement('option');
-                    option.value = `${item.nombre} ${item.apellido}`; // Combining nombre and apellido
-                    option.textContent = `${item.nombre} ${item.apellido}`; // Displaying combined nombre and apellido
+                    option.value = `${item.nombre} ${item.apellido}`; 
+                    option.textContent = `${item.nombre} ${item.apellido}`;
                     selectElement.appendChild(option);
                   });
                 } else {
