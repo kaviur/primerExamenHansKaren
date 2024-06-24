@@ -8,11 +8,12 @@ window.addEventListener("load", function () {
     fetch(url, settings)
       .then((response) => response.json())
       .then((data) => {
-        if (data.success && data.data && Array.isArray(data.data)) {
-          for (let turno of data.data) {
-            console.log(turno)
 
-            const table = document.getElementById("turnosTableBody");
+        if (data.success && data.data && Array.isArray(data.data)) {
+          const table = document.getElementById("turnosTableBody");
+          table.innerHTML = ""; // Limpiar la tabla antes de agregar las filas
+
+          for (let turno of data.data) {
             const turnoRow = table.insertRow();
             let tr_id = turno.id;
             turnoRow.id = tr_id;
@@ -110,7 +111,7 @@ window.addEventListener("load", function () {
     updateModal.close();
   }
 
-  //updateCancelButton.addEventListener("click", closeUpdateModal);
+  updateCancelButton.addEventListener("click", closeUpdateModal);
 
   const pacienteSelect = document.getElementById('paciente');
   const odontologoSelect = document.getElementById('odontologo');
@@ -187,11 +188,6 @@ window.addEventListener("load", function () {
         fecha: document.getElementById("fecha").value,
       }),
     };
-
-    console.log("settings-----")
-    console.log(settings);
-    console.log(JSON.stringify(settings))
-
 
     fetch(url, settings)
       .then((response) => {
