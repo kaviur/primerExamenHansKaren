@@ -21,7 +21,6 @@
         z-index: -1;
       }
     </style>
-    <script type="text/javascript" src="js/get_citas_paciente.js" defer></script>
   </head>
 
 <body>
@@ -62,14 +61,18 @@
                       </a>
                   </nav>
             </div>
-            <div class=" rounded-md overflow-hidden md:col-span-3 bg-white p-6 rounded shadow">
+            <div class=" rounded-md overflow-hidden md:col-span-3 bg-white p-6 rounded shadow" style="min-height: calc(100vh - 200px);">
             <h1 class="text-2xl font-bold textfont-bold text-center">Mis citas odontológicas</h1>
-            <table id="turnoTable" class="table table-zebra mt-3">
-                <!-- head -->
+            <p id="no-citas" class="text-center text-gray-500 text-lg p-4 bg-gray-200 rounded-md shadow-md">
+                No tienes citas agendadas
+              </p>
+              
+              <table id="turnoTable" class="table table-zebra mt-3 hidden w-full">
                 <thead class="bg-base-300">
                     <tr>
                         <th>Odontologo</th>
                         <th>Fecha</th>
+                        <th>Hora</th>
                     </tr>
                 </thead>
                 <tbody id="citasPaciente">
@@ -79,44 +82,8 @@
         </div>
     </main>
 
-    <dialog id="confirmDeleteModal" class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-lg">Confirmar Eliminación</h3>
-            <p class="py-4">¿Estás seguro de que deseas eliminar este Turno?</p>
-            <div class="modal-action">
-                <button id="cancelDeleteButton" class="btn btn-success">Cancelar</button>
-                <button id="confirmDeleteButton" class="btn btn-error">Eliminar</button>
-            </div>
-        </div>
-    </dialog>
 
-    <dialog id="updateModal" class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-lg">Actualizar</h3>
-
-            <form id="updateTurnoForm" class="p-2 flex gap-3 flex-col">
-                <input id="turnoId" type="number" class="hidden" />
-
-                <label class="input input-bordered flex items-center gap-2">
-                    ID Paciente:
-                    <input id="turnoPacienteId" type="number" class="grow" placeholder="123" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2">
-                    ID Odontologo:
-                    <input id="turnoOdontologoId" type="number" class="grow" placeholder="123" required />
-                </label>
-                <label class="input input-bordered flex items-center gap-2">
-                    <input type="date" id="turnoFecha" class="grow" placeholder="Fecha" required />
-                </label>
-
-                <div class="modal-action">
-                    <button type="button" id="updateCancelButton" class="btn btn-warning">Cancelar</button>
-                    <button vtype="submit" id="updateConfirmButton" class="btn btn-success">Actualizar</button>
-                </div>
-            </form>
-        </div>
-    </dialog>
-
+    <script type="text/javascript" src="js/get_citas_paciente.js"></script>
 </body>
 
 

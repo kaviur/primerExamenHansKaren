@@ -1,38 +1,5 @@
 window.addEventListener("load", function () {
-    // Definir las funciones globalmente
-    window.loadTurnosOdontologo = function (id) {
-      const url = `api/turno/odontologo/${id}`;
-      const settings = {
-        method: "GET",
-      };
-  
-      fetch(url, settings)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("siii")
-            console.log(data)
-          if (data.success && data.data && Array.isArray(data.data)) {
-            const table = document.getElementById("turnosOdontologo");
-            table.innerHTML = ""; // Limpiar la tabla antes de agregar las filas
-  
-            for (let turno of data.data) {
-              const turnoRow = table.insertRow();
-              let tr_id = turno.id;
-              turnoRow.id = tr_id;
-  
-              turnoRow.innerHTML = `
-                <td class="paciente">${turno.paciente.nombre} ${turno.paciente.apellido}</td>
-                <td class="fecha">${turno.fecha}</td>
-              `;
-            }
-          } else {
-            console.error('Invalid data format or no data found');
-          }
-        })
-        .catch((error) => console.error("Error al obtener los turnos del odontólogo:", error));
-    };
-  
-    window.loadTurnosPaciente = function (id) {
+    function loadCitas(id) {
       const url = `api/turno/paciente/${id}`;
       const settings = {
         method: "GET",
@@ -41,32 +8,48 @@ window.addEventListener("load", function () {
       fetch(url, settings)
         .then((response) => response.json())
         .then((data) => {
-            console.log("siii")
-            console.log(data)
-          if (data.success && data.data && Array.isArray(data.data)) {
-            const table = document.getElementById("citasPaciente");
-            table.innerHTML = ""; // Limpiar la tabla antes de agregar las filas
+          const tableBody = document.getElementById("citasPaciente");
+          const table = document.getElementById("turnoTable");
+          const noCitasMsg = document.getElementById("no-citas");
+  
+          if (data.success && data.data && Array.isArray(data.data) && data.data.length > 0) {
+            tableBody.innerHTML = ""; // Limpiar la tabla antes de agregar las filas
   
             for (let turno of data.data) {
-              const turnoRow = table.insertRow();
+              const turnoRow = tableBody.insertRow();
               let tr_id = turno.id;
               turnoRow.id = tr_id;
+
+              // Extraer fecha y hora del formato ISO 8601
+              const [date, time] = turno.fecha.split("T");
+              const formattedTime = time.substring(0, 5); 
   
               turnoRow.innerHTML = `
-                <td class="odontologo">${turno.odontologo.nombre} ${turno.odontologo.apellido}</td>
-                <td class="fecha">${turno.fecha}</td>
+                <td class="odontologo">Dr ${turno.odontologo.nombre} ${turno.odontologo.apellido}</td>
+                <td class="fecha">${date}</td>
+                <td class="hora">${formattedTime}</td>
               `;
             }
+  
+            // Mostrar la tabla y ocultar el mensaje
+            table.classList.remove("hidden");
+            noCitasMsg.classList.add("hidden");
           } else {
-            console.error('Invalid data format or no data found');
+            // Ocultar la tabla y mostrar el mensaje
+            table.classList.add("hidden");
+            noCitasMsg.classList.remove("hidden");
           }
         })
-        .catch((error) => console.error("Error al obtener los turnos del paciente:", error));
-    };
+        .catch((error) => {
+          console.error("Error al obtener los turnos del paciente:", error);
   
-    // Ejemplo de cómo llamar a las funciones al cargar la página con un ID específico
-    document.addEventListener("DOMContentLoaded", function() {
-      loadTurnosPaciente(1); // Reemplaza 2 con el ID del paciente necesario
-    });
+          // Ocultar la tabla y mostrar el mensaje en caso de error
+          document.getElementById("citasPaciente").classList.add("hidden");
+          document.getElementById("no-citas").classList.remove("hidden");
+        });
+    }
+  
+    // Llamar a la función al cargar la página con un ID específico
+    loadCitas(2); // Reemplaza 2 con el ID del paciente necesario
   });
   

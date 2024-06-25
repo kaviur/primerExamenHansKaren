@@ -18,7 +18,6 @@ import java.util.List;
 @Tag(name = "Turno", description = "Operaciones relacionadas con los turnos")
 public class TurnoController {
     private final ITurnoService turnoService;
-
     @GetMapping
     public ResponseEntity<Response> buscarTodos(){
         List<IDto> turnos = turnoService.buscarTodos();
