@@ -50,6 +50,6 @@ window.addEventListener("load", function () {
     }
   
     // Llamar a la función al cargar la página con un ID específico
-    loadCitas(2); // Reemplaza 2 con el ID del paciente necesario
+    loadCitas(1); // Reemplaza 2 con el ID del paciente necesario
   });
   
