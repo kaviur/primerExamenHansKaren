@@ -22,6 +22,7 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     }
   </style>
+  <script type="text/javascript" src="js/login.js"></script>
 </head>
 <body class="flex flex-col min-h-screen">
   <header class=" bg-[#114455] text-white px-4 lg:px-6 h-14 flex items-center">
@@ -55,7 +56,7 @@
           </div>
           <div class="bg-white bg-opacity-90 rounded-lg p-6">
             <h2 class="text-3xl font-bold mb-4 text-[#114455]">Ingresa</h2>
-            <form class="space-y-4">
+            <form id="emailForm" class="space-y-4">
               <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                 <input id="email" type="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" placeholder="example@email.com" required>
