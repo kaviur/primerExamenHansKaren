@@ -50,6 +50,6 @@ window.addEventListener("load", function () {
     }
   
     // Llamar a la función al cargar la página con un ID específico
-    loadTurnos(2); // Reemplaza 2 con el ID del odontólogo necesario
+    loadTurnos(1); // Reemplaza 2 con el ID del odontólogo necesario
   });
   
