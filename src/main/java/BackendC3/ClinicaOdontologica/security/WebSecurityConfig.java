@@ -39,7 +39,7 @@ public class WebSecurityConfig {
 //                        .requestMatchers(HttpMethod.GET, "/api/paciente/**").hasAnyRole("PACIENTE", "ODONTOLOGO")
 //                        .requestMatchers(HttpMethod.GET, "/api/odontologo/**").hasAnyRole("PACIENTE", "ODONTOLOGO")
 //                        .requestMatchers(HttpMethod.GET, "/api/turno/**").hasAnyRole("PACIENTE", "ODONTOLOGO")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(withDefaults())
 //                .formLogin(form -> form
