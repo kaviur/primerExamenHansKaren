@@ -4,11 +4,13 @@ import BackendC3.ClinicaOdontologica.dto.IDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Value;
 
 import java.io.Serializable;
 
 @Value
+@Data
 public class InputPacienteDto implements Serializable, IDto {
     @NotEmpty(message = "El nombre no puede estar vacío")
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
